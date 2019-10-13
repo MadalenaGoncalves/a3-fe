@@ -26,12 +26,15 @@ const PageLayout: NextPage<HomepageProps> = ({ children, title }) => {
       </Head>
 
       <header>
+        <a href="#main-content" id="skip-to-main-content">Jump to main content</a>
         <span>LOGO</span>
         <span>Hamburger button</span>
         <Menu />
       </header>
       
-      {children}
+      <main id="main-content">
+        {children}
+      </main>
 
       <footer>
         <FooterMenu />

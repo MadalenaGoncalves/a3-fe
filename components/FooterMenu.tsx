@@ -5,17 +5,17 @@ const menuStyles: any = { display: 'flex', flexDirection: 'column', marginRight:
 
 // check again Next.js, why do I need the title on the anchor?
 const FooterMenu = () => (
-  <nav id="main-nav" aria-label="Footer menu"  style={navStyles}>
-    <div style={menuStyles}>
-      <Link href='/'><a title='Home'>Home</a></Link>
-      <Link href='/projects'><a title='Projects'>Projects</a></Link>
-    </div>
+  <nav id="footer-nav" aria-label="Footer menu"  style={navStyles}>
+    <ul style={menuStyles}>
+      <li><Link href='/'><a title='Home'>Home</a></Link></li>
+      <li><Link href='/projects'><a title='Projects'>Projects</a></Link></li>
+    </ul>
 
-    <div style={menuStyles}>
-      <Link href='/contacts'><a title='Contacts'>Contacts</a></Link>
-      <Link href='/impressum'><a title='Impressum'>Impressum</a></Link>
-      <Link href='/datenschutz'><a title='Datenschutz'>Datenschutz</a></Link>
-    </div>
+    <ul style={menuStyles}>
+      <li><Link href='/contacts'><a title='Contacts'>Contacts</a></Link></li>
+      <li><Link href='/impressum'><a title='Impressum'>Impressum</a></Link></li>
+      <li><Link href='/datenschutz'><a title='Datenschutz'>Datenschutz</a></Link></li>
+    </ul>
   </nav>
 );
 
