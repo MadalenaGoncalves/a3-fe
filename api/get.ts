@@ -1,11 +1,11 @@
 import fetch from 'isomorphic-fetch';
 import { Response } from './types';
 
+// TODO remove hardcoded url
 const base = 'http://localhost:8888/';
 
 function get(path: string, query: any = null): Promise<Response> {
   let url = `${base}${path}`;
-
   if (query) {
     const { id } = query;
     url = `${url}/${id}`;
