@@ -5,4 +5,8 @@ export type ResponseError = {
   message: string
 };
 
-export type Response = ResponseData | ResponseError;
+export interface Response {
+  data: ResponseData,
+  error?: ResponseError
+}
+// export type Response = ResponseData | ResponseError;

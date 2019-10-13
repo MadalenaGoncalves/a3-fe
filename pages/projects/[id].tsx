@@ -1,25 +1,42 @@
 import { NextPage } from 'next';
 
 import get from '../../api/get';
-import { Response } from '../../api/types';
+import { ResponseError } from '../../api/types';
 import { PATH_PROJECT } from '../../api/constants';
-
 import ProjectLayout from '../../components/pages/Project';
+import Project from '../../models/project';
 
-const ProjectPage: NextPage<Response> = (props) => {
-  return <ProjectLayout {...props} />;
+interface Props {
+  data: Project,
+  error?: ResponseError
+}
+
+const ProjectPage: NextPage<Props> = (props) => {
+  return <ProjectLayout project={props.data} {...props.error} />;
 }
 
 ProjectPage.getInitialProps = async ({ query }) => {
   const { id } = query;
-  let response: Response;
+  
   try {
-    response = await get(PATH_PROJECT, { id });
+    const response = await get(PATH_PROJECT, { id });
+    const data = response.data[0];
+
+    const initialProps: Props = {
+      // data: Object.assign({}, data as Project)
+      data: new Project(data)
+    }
+
+    // console.log('initialProps', initialProps);
+    return initialProps;
+
   } catch (err) {
-    response = err;
+    const initialProps: Props = {
+      data: new Project({}),
+      error: err
+    }
+    return initialProps;
   }
-  return response;
 };
 
 export default ProjectPage;
-

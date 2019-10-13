@@ -20,7 +20,7 @@ function withErrorHandler<InjectedProps extends object> (
       if (this.props.error) {
         return <ErrorMessage {...this.props.error as ResponseError} />;
       }
-      return <Page data={this.props.data as ResponseData } />
+      return <Page {...this.props.data as ResponseData } />
     }
   }
 }
