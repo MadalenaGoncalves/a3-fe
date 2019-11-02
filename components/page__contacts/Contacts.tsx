@@ -1,4 +1,4 @@
-import { ResponseData } from '../../api/types';
+import { TResponseData } from '../../api/types';
 
 import PageLayout from '../../components/PageLayout';
 
@@ -9,7 +9,7 @@ import Contact from '../../models/contact';
 
 const entryStyle = { borderTop: '1px solid', marginBottom: '2rem' };
 
-const Contacts = (props: ResponseData) => {
+const Contacts = (props: TResponseData) => {
   const contacts = props.data;
   return (
     <PageLayout title="Contacts">

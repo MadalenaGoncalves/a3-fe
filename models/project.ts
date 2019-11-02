@@ -22,16 +22,19 @@ export default class Project {
   category?: string;
   // start_year?: number;
   // end_year?: number;
+
   // address?: string;
   // postcode?: string;
   // city?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+
   gross_area?: number;
   floor_area?: number;
   // phases?: string[];
   client?: string;
   image?: string;
   date?: string;
-  address?: string;
   phases?: string;
 
   // constructor () {}
@@ -44,14 +47,15 @@ export default class Project {
     if (data.floor_area) this.floor_area = data.floor_area;
     if (data.client) this.client = data.client;
     if (data.image) this.image = data.image;
+    if (data.address) this.addressLine1 = data.address;
+    if (data.postcode || data.city) this.addressLine2 = [data.postcode, data.city].join(" ");
 
     this.date = this.getDateStr(data.start_year, data.end_year);
-    this.address = this.getAddressStr(data.address, data.postcode, data.city);
+    // this.address = this.getAddressStr(data.address, data.postcode, data.city);
     this.phases = this.getPhasesStr(data.phases);
   }
 
   getDateStr(start_year: string, end_year: string): string {
-    // return "test";
     const values = [start_year, end_year];
     return values.join(" - ");
   }
@@ -63,9 +67,11 @@ export default class Project {
     return values.join(", ");
   }
 
-   getPhasesStr(phases: string[]): string | undefined {
+   getPhasesStr(phases: string): string | undefined {
     if (!phases || phases.length == 0)
       return;
-    return phases.join(" | ");
+    const list: string[] = phases.split(';');
+
+    return list.join(" | ");
   }
 }

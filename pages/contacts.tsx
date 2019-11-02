@@ -4,7 +4,7 @@ import get from '../api/get';
 import { Response } from '../api/types';
 import { PATH_CONTACTS } from '../api/constants';
 
-import ContactsLayout from '../components/pages/Contacts';
+import ContactsLayout from '../components/page__contacts/Contacts';
 
 const ContactsPage: NextPage<Response> = (props) => {
   return <ContactsLayout {...props} />;

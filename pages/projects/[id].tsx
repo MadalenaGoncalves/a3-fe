@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import get from '../../api/get';
 import { ResponseError } from '../../api/types';
 import { PATH_PROJECT } from '../../api/constants';
-import ProjectLayout from '../../components/pages/Project';
+import ProjectLayout from '../../components/page__project/Project';
 import Project from '../../models/project';
 
 interface Props {
