@@ -1,12 +1,11 @@
-export type ResponseData = any;
+export type TResponseData = any;
 
-export type ResponseError = {
+export type TResponseError = {
   code: number,
   message: string
 };
 
-export interface Response {
-  data: ResponseData,
-  error?: ResponseError
+export type TResponse = {
+  data: TResponseData,
+  error?: TResponseError
 }
-// export type Response = ResponseData | ResponseError;

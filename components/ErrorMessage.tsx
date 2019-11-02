@@ -1,9 +1,9 @@
-import { ResponseError } from '../api/types';
+import { TResponseError } from '../api/types';
 
 import PageLayout from './PageLayout';
 
 
-const ErrorMessage = (error: ResponseError) => {
+const ErrorMessage = (error: TResponseError) => {
   return (
     <PageLayout title="Error">
       <h1>Something went wrong...</h1>

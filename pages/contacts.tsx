@@ -1,17 +1,17 @@
 import { NextPage } from 'next';
 
 import get from '../api/get';
-import { Response } from '../api/types';
+import { TResponse } from '../api/types';
 import { PATH_CONTACTS } from '../api/constants';
 
 import ContactsLayout from '../components/page__contacts/Contacts';
 
-const ContactsPage: NextPage<Response> = (props) => {
+const ContactsPage: NextPage<TResponse> = (props) => {
   return <ContactsLayout {...props} />;
 }
 
 ContactsPage.getInitialProps = async () => {
-  let response: Response;
+  let response: TResponse;
   try {
     response = await get(PATH_CONTACTS);
   } catch (err) {

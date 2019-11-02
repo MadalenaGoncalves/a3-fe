@@ -1,10 +1,10 @@
 import fetch from 'isomorphic-fetch';
-import { Response } from './types';
+import { TResponse } from './types';
 
 // TODO remove hardcoded url
 const base = 'http://localhost:8888/';
 
-function get(path: string, query: any = null): Promise<Response> {
+function get(path: string, query: any = null): Promise<TResponse> {
   let url = `${base}${path}`;
   if (query) {
     const { id } = query;
@@ -14,7 +14,7 @@ function get(path: string, query: any = null): Promise<Response> {
   console.log('@api ', url, query);
 
   return new Promise(async function (resolve, reject) {
-    const response: Response = {
+    const response: TResponse = {
       data: null,
     };
 
