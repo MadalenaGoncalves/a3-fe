@@ -1,11 +1,9 @@
 import fetch from 'isomorphic-fetch';
 import { TResponse } from './types';
 
-// TODO remove hardcoded url
-const base = 'http://localhost:8888/';
 
 function get(path: string, query: any = null): Promise<TResponse> {
-  let url = `${base}${path}`;
+  let url = `${process.env.API_URL}${path}`;
   if (query) {
     const { id } = query;
     url = `${url}/${id}`;
