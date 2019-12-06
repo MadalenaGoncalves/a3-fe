@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 
 import get from '../../api/get';
 import { TResponse } from '../../api/types';
-import { PATH_PROJECT } from '../../api/constants';
+import { API_PATH_PROJECTS } from '../../api/constants';
 
 import ProjectsLayout from '../../components/page__projects/Projects';
 
@@ -13,9 +13,9 @@ const ProjectsPage: NextPage<TResponse> = (props) => {
 
 //[ 'err', 'req', 'res', 'pathname', 'query', 'asPath' ]
 ProjectsPage.getInitialProps = async () => {
-  let response: TResponse;
+  let response: any;
   try {
-    response = await get(PATH_PROJECT);
+    response = await get(API_PATH_PROJECTS);
   } catch (err) {
     response = err;
   }

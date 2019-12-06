@@ -6,7 +6,7 @@ function get(path: string, query: any = null): Promise<TResponse> {
   let url = `${process.env.API_URL}${path}`;
   if (query) {
     const { id } = query;
-    url = `${url}/${id}`;
+    url = url.replace(':id', id);
   }
 
   console.log('@api ', url, query);
@@ -35,6 +35,9 @@ function get(path: string, query: any = null): Promise<TResponse> {
       if (fetchResponse && fetchResponse.ok) {
         const { data } = await fetchResponse.json();
         response.data = data;
+
+        resolve(response);
+
       } else {
         const { status, statusText } = fetchResponse;
         response.error = {
@@ -43,10 +46,8 @@ function get(path: string, query: any = null): Promise<TResponse> {
         }
         reject(response);
       }
-
-      resolve(response);
     } catch (err) {
-      console.log('Error fetching from', url)
+      console.log('Error fetching from', url);
       response.error = {
         code: 500,
         message: err
@@ -62,10 +63,7 @@ export default get;
 // import fetch from 'isomorphic-fetch';
 // import { ResponseData, ResponseError } from './types';
 
-// const base = 'http://localhost:8888/';
-
 // function get(path: string, query: any = null): Promise<Response> {
-//   let url = `${base}${path}`;
 
 //   if (query) {
 //     const { id } = query;
