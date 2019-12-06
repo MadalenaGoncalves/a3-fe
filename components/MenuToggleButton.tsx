@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
+import media from '../styles/media';
 
 interface Props {
   isActive: boolean,
@@ -30,6 +31,10 @@ const Button = styled.button`
     cursor: pointer;
   }
   z-index: 101;
+
+  ${media.tablet`
+    display: none;
+  `};
 `;
 
 type IconProps = { active: boolean; };
@@ -37,11 +42,9 @@ const Icon = styled.div<IconProps>`
   width: 35px;
   height: 35px;
   position: relative;
-  display: inline-block;
-  display: block;
 
   span {
-    background-color: #fff;
+    background-color: ${props => props.theme.colors.primary};
     border-radius: 0;
     height: 3px;
     position: absolute;
@@ -56,6 +59,7 @@ const Icon = styled.div<IconProps>`
       ${props => props.active && css`
         top: 50%;
         transform: rotate(-45deg);
+        background-color: ${props => props.theme.colors.white};
       `};
     }
     
@@ -75,6 +79,7 @@ const Icon = styled.div<IconProps>`
       ${props => props.active && css`
         top: 50%;
         transform: rotate(45deg);
+        background-color: ${props => props.theme.colors.white};
       `};
     }
   }

@@ -1,25 +1,82 @@
 import styled from 'styled-components';
+import media from '../styles/media';
 
 export default styled.header`
-  background-color: ${props => props.theme.colors.menubar};
-  position: absolute;
+  // background: cornflowerblue;
+  
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
 
-  padding: 0 2.5rem;
-
+  height: 60px;
+  padding: 0 1rem;
+  
   display: flex;
-  flex-direction: row;
+  flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
 
-  z-index: 100;
+  ${media.tablet`
+    bottom: 0;
+    right: auto;
+
+    height: 100%;
+    max-height: 100vh;
+    width: 230px;
+    max-width: 230px;
+    
+    padding: 0;
+
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    img {
+      margin-top: 0.67em;
+      margin-left: 15px;
+    }
+  `};
 `;
 
-// <Header>
-//   <JumpToMainLink href="#main-content" id="skip-to-main-content">Jump to main content</JumpToMainLink>
-//   <img src="/static/images/logo_transparency.png" />
-//   <HamburgerButton />
-//   <Menu />
-// </Header>
+export const MainContainer = styled.div`
+  margin-left: 0;
+  
+  ${media.tablet`
+    margin-left: 230px;
+  `};
+
+  main {
+    margin-top: 85px;
+
+    ${media.tablet`
+      margin-top: 0px;
+      margin-left: 15px;
+    `};
+  }
+`;
+
+export const FooterLinks = styled.div`
+  margin-top: auto;
+  margin-left: 15px;
+  margin-bottom: 1rem;
+  margin-right: 15px;
+  color: currentColor;
+  fontSize: 13px;
+  lineHeight: 1.2;
+
+  a {
+    display: blocK;
+    margin-top: 5px;
+    color: currentColor;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    };
+  }
+
+  display: none;
+  ${media.tablet`
+    display: block;
+  `};
+`;

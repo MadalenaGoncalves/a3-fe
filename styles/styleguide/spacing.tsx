@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import media from '../../styles/media';
+import media from '../media';
 
 export const page_layout__margin = css`
   margin-left: 1rem;

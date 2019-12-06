@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head'
+import Link from 'next/link';
 
 import Menu from '../containers/Menu';
 import MenuTogglerButton from '../containers/MenuToggler';
 
-import Footer from './Footer';
-import FooterMenu from './FooterMenu';
-import Header from './PageHeader';
+import Header, { MainContainer, FooterLinks } from './PageHeader';
 import JumpToMainLink from './JumpToMainLink';
 
 interface HomepageProps {
@@ -38,15 +37,18 @@ const PageLayout: NextPage<HomepageProps> = ({ children, title }) => {
         <img src="/static/images/logo_transparency.png" />
         <Menu />
         <MenuTogglerButton />
+        
+        <FooterLinks>
+          <Link href='/impressum'><a title='Impressum'>Impressum</a></Link>
+          <Link href='/datenschutz'><a title='Datenschutz'>Datenschutz</a></Link>
+        </FooterLinks>
       </Header>
       
-      <main id="main-content">
-        {children}
-      </main>
-
-      <Footer>
-        <FooterMenu />
-      </Footer>
+      <MainContainer>
+        <main id="main-content">
+          {children}
+        </main>
+      </MainContainer>
     </React.Fragment>
   );
 }

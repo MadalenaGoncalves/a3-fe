@@ -5,7 +5,7 @@ import Menu from '../components/Menu';
 
 type Props = ReturnType<typeof mapStateToProps>;
 
-const MainMenu: React.SFC<Props> = ({ isOpen }) => {
+const MainMenu: React.FunctionComponent<Props> = ({ isOpen }) => {
   return (<Menu isOpen={isOpen} />);
 }
 
