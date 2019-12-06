@@ -1,7 +1,6 @@
 import Document, { DocumentContext, Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 
-
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet()
@@ -32,8 +31,8 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <title>A3 Architekten</title>
-          <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico" />
+          <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
+          <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
         </Head>
         <body>
           <Main />
