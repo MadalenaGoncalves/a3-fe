@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { font__heroImageTitle} from '../../styleguide/typography';
+import { font__heroImageTitle} from '../../../styles/styleguide/typography';
 
 export default styled.h1`
   ${font__heroImageTitle};

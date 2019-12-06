@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { section__vertical_spacing, page_layout__margin } from '../../styleguide/spacing';
+import { section__vertical_spacing, page_layout__margin } from '../../../styles/styleguide/spacing';
 
 export default styled.section`
   ${page_layout__margin};

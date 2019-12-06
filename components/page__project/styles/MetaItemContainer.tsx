@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import media from '../../../styles/media';
 
 export default styled.div`
-  flex: 1 0 auto;
   // background: antiquewhite;
 
   &:first-child {

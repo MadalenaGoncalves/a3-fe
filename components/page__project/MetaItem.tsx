@@ -1,5 +1,5 @@
 import * as React from 'react';
-import MetaItemContainer from './styles/MetaItemContainer';
+// import MetaItemContainer from './styles/MetaItemContainer';
 import MetaItemTitle from './styles/MetaTitle';
 import MetaItemText from './styles/MetaText';
 
@@ -11,11 +11,11 @@ interface IProjectMeta {
 const MetaItem = ({ title, value }: IProjectMeta) => {
   if (!value) return null;
   return (
-    <MetaItemContainer>
-      <MetaItemTitle>{title}</MetaItemTitle>
-      <MetaItemText>{value}</MetaItemText>
-    </MetaItemContainer>
+    <p>
+      <MetaItemTitle>{title}|</MetaItemTitle><MetaItemText>{value}</MetaItemText>
+    </p>
   );
 }
+
 
 export default MetaItem;

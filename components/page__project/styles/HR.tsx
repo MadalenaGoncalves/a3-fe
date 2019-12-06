@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { page_layout__margin } from '../../styleguide/spacing';
+import { page_layout__margin } from '../../../styles/styleguide/spacing';
 
 export default styled.hr`
   ${page_layout__margin};
