@@ -81,7 +81,7 @@ const Project = ({ data }: IProps) => {
       }
 
       <AllProjectsLink>
-        <Link href='/projects'>
+        <Link href='/projects' passHref>
           <a title={project.title}>Andere Projekte</a>
         </Link>
       </AllProjectsLink>

@@ -39,8 +39,8 @@ const PageLayout: NextPage<HomepageProps> = ({ children, title }) => {
         <MenuTogglerButton />
         
         <FooterLinks>
-          <Link href='/impressum'><a title='Impressum'>Impressum</a></Link>
-          <Link href='/datenschutz'><a title='Datenschutz'>Datenschutz</a></Link>
+          <Link href='/impressum' passHref><a title='Impressum'>Impressum</a></Link>
+          <Link href='/datenschutz' passHref><a title='Datenschutz'>Datenschutz</a></Link>
         </FooterLinks>
       </Header>
       

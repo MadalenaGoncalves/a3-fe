@@ -26,10 +26,10 @@ const ContactsList = (props: TResponseData) => {
               </div>
 
               <Toolbar>
-                <Link href={`/admin/contacts/${item.id}/edit`}>
+                <Link href={`/admin/contacts/${item.id}/edit`} passHref>
                   <a><SmallIcon src="/static/images/icon_pencil.svg" alt="edit" /></a>
                 </Link>
-                <Link href={`/admin/projects/${item.id}/delete`}>
+                <Link href={`/admin/projects/${item.id}/delete`} passHref>
                   <a><SmallIcon src="/static/images/icon_bin.svg" alt="delete" /></a>
                 </Link>
               </Toolbar>

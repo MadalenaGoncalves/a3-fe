@@ -84,11 +84,11 @@ const AdminPageLayout: NextPage<HomepageProps> = ({ children, title }) => {
           <img src="/static/images/logo_transparency.png" />
           <span style={{ flex: 1 }}></span>
           <Button startIcon={<PlaylistAddIcon />} className={classes.headerButton}>
-            <Link href={`${projectsBaseUrl}/add`}><HeaderLink>Add project</HeaderLink></Link>
+            <Link href={`${projectsBaseUrl}/add`} passHref><HeaderLink>Add project</HeaderLink></Link>
           </Button>
 
           <Button startIcon={<PersonAddIcon />} className={classes.headerButton}>
-            <Link href={`${contactsBaseUrl}/add`}><HeaderLink>Add contact</HeaderLink></Link>
+            <Link href={`${contactsBaseUrl}/add`} passHref><HeaderLink>Add contact</HeaderLink></Link>
           </Button>
         </Toolbar>
       </AppBar>
@@ -103,18 +103,20 @@ const AdminPageLayout: NextPage<HomepageProps> = ({ children, title }) => {
                 className: classes.drawerPaper,
             }}
         >
-          <Link href={`${projectsBaseUrl}`}>
+          <Link href={`${projectsBaseUrl}`} passHref>
             <MenuItem component="a">
               <ApartmentIcon fontSize="small" />
               Projects
             </MenuItem>
           </Link>
-          <Link href={`${contactsBaseUrl}`}><MenuItem component="a">
-            <PersonIcon fontSize="small" />
+          <Link href={`${contactsBaseUrl}`} passHref>
+            <MenuItem component="a">
+              <PersonIcon fontSize="small" />
               Contacts
             </MenuItem>
           </Link>
-          <Link href="/logout"><MenuItem component="a">
+          <Link href="/logout" passHref>
+            <MenuItem component="a">
             <LogoutIcon fontSize="small" />
               Logout
             </MenuItem>

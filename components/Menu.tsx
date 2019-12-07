@@ -28,7 +28,7 @@ export const Menu: React.SFC<Props> = ({ isOpen }) => (
     <MenuNav__List role="menubar" aria-label="Main menu">
       {menuItems.map((item) => (
         <li key={item.title} role="none">
-          <Link href={item.uri}>
+          <Link href={item.uri} passHref>
             <a title={item.title} role="menuitem">
               {item.title}
             </a>

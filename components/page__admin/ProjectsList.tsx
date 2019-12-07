@@ -52,7 +52,7 @@ const ProjectsList = (props: TResponseData) => {
                 </TableCell>
                 <TableCell align="center">
                   <Button startIcon={<EditIcon />}>
-                    <Link href={`/admin/projects/${item.id}/edit`}><a>Edit</a></Link>
+                    <Link href={`/admin/projects/${item.id}/edit`} passHref><a>Edit</a></Link>
                   </Button>
                 </TableCell>
               </TableRow>

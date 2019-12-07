@@ -27,7 +27,7 @@ const HausverwaltungPage = () => (
     </div>
 
     <div>
-      <Link href="/a3projekte/datenschutz"><a title="Datenschutzerklärung">DATENSCHUTZ</a></Link>
+      <Link href="/a3projekte/datenschutz" passHref><a title="Datenschutzerklärung">DATENSCHUTZ</a></Link>
     </div>
 
   </div>

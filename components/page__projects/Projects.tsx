@@ -7,6 +7,7 @@ import withErrorHander from '../../hocs/withErrorHander';
 import { TApiProjectMinimal } from '../../models/serverTypes';
 
 import PageLayout from '../PageLayout';
+// import PageTitle from '../PageTitle';
 
 import media from '../../styles/media';
 import { font__projectsTitle } from '../../styles/styleguide/typography';
@@ -18,13 +19,14 @@ const Projects = (props: TResponseData) => {
   
   return (
     <PageLayout title="Projects">
+      {/* <PageTitle>Projekte</PageTitle> */}
 
       <GridList>
         {projects && projects.map((project: TApiProjectMinimal) => {
           return (
             <GridItem key={project.id}>
               {project.imageId ? (
-                  <Link href='/projects/[id]' as={`/projects/${project.id}`}>
+                  <Link href='/projects/[id]' as={`/projects/${project.id}`} passHref>
                     <a title={project.title}>
                       {project.imageId ? (
                         <figure>
