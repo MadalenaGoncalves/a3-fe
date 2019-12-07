@@ -1,12 +1,26 @@
 import { NextPage } from 'next';
 
-import { TResponse } from '../../../api/types';
+import { TResponse, TResponseError } from '../../../api/types';
 import ProjectForm from '../../../components/page__admin/ProjectForm';
+import Project from '../../../models/project';
 
-const AdminAddContactPage: NextPage<TResponse> = (props) => {
+const AdminAddProjectPage: NextPage<TResponse> = (props) => {
   return (
     <ProjectForm add {...props} />
   );
 }
 
-export default AdminAddContactPage;
+export default AdminAddProjectPage;
+
+interface Props {
+  data: Project,
+  error?: TResponseError
+}
+
+AdminAddProjectPage.getInitialProps = async () => {
+  const initialProps: Props = {
+    data: new Project()
+  }
+
+  return initialProps;
+};

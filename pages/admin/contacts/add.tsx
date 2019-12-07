@@ -1,7 +1,8 @@
 import { NextPage } from 'next';
 
-import { TResponse } from '../../../api/types';
+import { TResponse, TResponseError } from '../../../api/types';
 import ContactForm from '../../../components/page__admin/ContactForm';
+import Contact from '../../../models/contact';
 
 const AdminAddContactPage: NextPage<TResponse> = (props) => {
   return (
@@ -10,3 +11,16 @@ const AdminAddContactPage: NextPage<TResponse> = (props) => {
 }
 
 export default AdminAddContactPage;
+
+interface Props {
+  data: Contact,
+  error?: TResponseError
+}
+
+AdminAddContactPage.getInitialProps = async () => {
+  const initialProps: Props = {
+    data: new Contact()
+  }
+
+  return initialProps;
+};

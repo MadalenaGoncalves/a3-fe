@@ -12,7 +12,12 @@ export default class Contact {
   url?: string;
   email?: string;
 
-  constructor(data: TApiContact) {
+  constructor(data?: TApiContact) {
+    if (!data) {
+      this.createEmpty();
+      return;
+    }
+
     this.id = data.id;
     this.name = data.name;
     if (data.department) this.department = data.department;
@@ -25,7 +30,7 @@ export default class Contact {
     if (data.email) this.email = data.email;
   }
 
-  create() {
+  createEmpty() {
     this.id = undefined;
     this.name = undefined;
     this.department = undefined;
