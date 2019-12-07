@@ -2,6 +2,7 @@ import * as React from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head'
 import Link from 'next/link';
+import Router from 'next/router';
 // import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
@@ -57,6 +58,17 @@ const useStyles = makeStyles({
 
 const defaultTitle = 'ADMIN - A3 ARCHITEKTEN BERLIN-DÜSSELDORF '
 const AdminPageLayout: NextPage<HomepageProps> = ({ children, title }) => {
+
+
+  Router.events.on('routeChangeStart', url => {
+    console.log('Navigating to:', url);
+  });
+  
+  Router.events.on('routeChangeComplete', url => {
+    console.log('Completed navigation to: ', url);
+  });
+
+
   const classes = useStyles();
   // const router = useRouter();
   // const { pathname } = router;
