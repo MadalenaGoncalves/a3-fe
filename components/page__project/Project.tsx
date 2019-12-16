@@ -158,16 +158,20 @@ const AllProjectsLink = styled.div`
   ${section__vertical_spacing};
   text-align: center;
   a {
+    ${font__projectOtherProjects};
+    color: currentColor;
     text-decoration: none;
-    display: inline-block;
-    padding: 1.1rem 1.3rem;
-    border-radius: 40px;
-    background: ${props => props.theme.colors.black};
-    color: ${props => props.theme.colors.white};
-    opacity: 1;
-
+    position: relative;
+    padding-left: 1rem;
     &:hover {
-      opacity: .8;
+      text-decoration: underline;
+    }
+
+    &:before {
+      content: "<";
+      position: absolute;
+      top: -1px;
+      left: 0;
     }
   }
 `;

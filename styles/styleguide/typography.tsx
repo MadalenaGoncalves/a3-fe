@@ -30,6 +30,12 @@ export const font__projectMetaText = css`
   line-height: 1.7;
 `;
 
+export const font__projectOtherProjects = css`
+  font-family: ${props => props.theme.fonts.family.secondary};
+  text-decoration: none;
+  text-transform: uppercase;
+`;
+
 export const font__footerLink = css`
   font-family: ${props => props.theme.fonts.family.secondary};
   font-size: 1rem;
