@@ -34,7 +34,9 @@ const PageLayout: NextPage<HomepageProps> = ({ children, title }) => {
 
       <Header>
         <JumpToMainLink href="#main-content" id="skip-to-main-content">Jump to main content</JumpToMainLink>
-        <img src="/static/images/logo_transparency.png" />
+        <Link href="/" passHref>
+            <a title="Home"><img src="/static/images/logo_transparency.png" /></a>
+          </Link>
         <Menu />
         <MenuTogglerButton />
         

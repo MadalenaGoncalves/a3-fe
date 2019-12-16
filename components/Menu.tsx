@@ -12,7 +12,6 @@ type MenuNavProps = {
 }
 
 const menuItems = [
-  { title: 'Home', uri: '/' },
   { title: 'Projects', uri: '/projects' },
   { title: 'Contacts', uri: '/contacts' },
   // { title: 'Login', uri: '/auth' },
@@ -20,16 +19,17 @@ const menuItems = [
 ];
 
 interface Props {
-  isOpen: boolean
+  isOpen: boolean,
+  onClose: () => {},
 }
 // check again Next.js, why do I need the title on the anchor?
-export const Menu: React.SFC<Props> = ({ isOpen }) => (
+export const Menu: React.SFC<Props> = ({ isOpen, onClose }) => (
   <MenuNav id="main-nav" aria-label="Main menu" visible={isOpen}>
     <MenuNav__List role="menubar" aria-label="Main menu">
       {menuItems.map((item) => (
         <li key={item.title} role="none">
           <Link href={item.uri} passHref>
-            <a title={item.title} role="menuitem">
+            <a title={item.title} role="menuitem" onClick={onClose}>
               {item.title}
             </a>
           </Link>

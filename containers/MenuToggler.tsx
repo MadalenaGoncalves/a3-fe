@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { doCloseMenu, doOpenMenu , doToggleMenu } from '../state/menu';
+import { doCloseMenu, doOpenMenu, doToggleMenu } from '../state/menu';
 
 import Button from '../components/MenuToggleButton';
 
@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch: any) =>
   bindActionCreators({
     open: doOpenMenu,
     close: doCloseMenu,
-    toggle: doToggleMenu,    
+    toggle: doToggleMenu,
   },
   dispatch
 );
