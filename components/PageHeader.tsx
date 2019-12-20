@@ -80,3 +80,28 @@ export const FooterLinks = styled.div`
     display: block;
   `};
 `;
+
+export const MobileFooter = styled.div`
+  ${media.tablet`
+    display: none;
+  `};
+
+  padding: 2.5rem 1rem;
+  margin-top: 2rem;
+  background: ${(props) => props.theme.colors.lightgray};
+  display: flex;
+  flex-flex: row wrap;
+  justify-content: center;
+  align-items: center;
+  
+  a {
+    font-size: 14px;
+    color: currentColor;
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    &:hover {
+      text-decoration: underline;
+    };
+  }
+`;
+

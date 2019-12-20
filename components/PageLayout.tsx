@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Menu from '../containers/Menu';
 import MenuTogglerButton from '../containers/MenuToggler';
 
-import Header, { MainContainer, FooterLinks } from './PageHeader';
+import Header, { MainContainer, FooterLinks, MobileFooter } from './PageHeader';
 import JumpToMainLink from './JumpToMainLink';
 
 interface HomepageProps {
@@ -49,6 +49,11 @@ const PageLayout: NextPage<HomepageProps> = ({ children, title }) => {
       <MainContainer>
         <main id="main-content">
           {children}
+
+          <MobileFooter>
+            <Link href='/impressum' passHref><a title='Impressum'>Impressum</a></Link>
+            <Link href='/datenschutz' passHref><a title='Datenschutz'>Datenschutz</a></Link>
+          </MobileFooter>
         </main>
       </MainContainer>
     </React.Fragment>
