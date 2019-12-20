@@ -5,27 +5,24 @@ import styled from 'styled-components';
 import { getImageUrl } from '../../api/utils';
 import withErrorHander from '../../hocs/withErrorHander';
 import CProject from '../../models/project';
+import { TApiImage } from '../../models/serverTypes';
 
 import PageLayout from '../PageLayout';
 import PageSection from '../PageSection';
 
-import MetaItem from './MetaItem';
-
-// import HeroH1 from './styles/HeroH1';
-// import HeroImageSection from './styles/HeroImageSection';
-import HR from './styles/HR';
-// import MetaSection from './styles/MetaSection';
-
 import { section__vertical_spacing } from '../../styles/styleguide/spacing';
-import { TApiImage } from '../../models/serverTypes';
+import { font__projectOtherProjects } from '../../styles/styleguide/typography';
+
+import MetaItem from './MetaItem';
+import HR from './styles/HR';
 
 
 interface IProps {
   data: CProject,
 }
 
-const Project = ({ data }: IProps) => {
-  const project = data;
+export const ProjectContent = (props: IProps) => {
+  const project = props.data;
 
   const renderAddress = () => (
     <React.Fragment>
@@ -35,12 +32,8 @@ const Project = ({ data }: IProps) => {
     </React.Fragment>
    );
 
-   return (
-    <PageLayout title={project.title}>
-      {/* <HeroImageSection img="/static/images/P1110470.JPG">
-        <HeroH1>{project.title}</HeroH1>
-      </HeroImageSection> */}
-      
+  return (
+    <React.Fragment>
       <PageSection>
         <Header>{project.title}</Header>
 
@@ -79,20 +72,23 @@ const Project = ({ data }: IProps) => {
           ))}
         </DesignGallery>
       }
-
-      <AllProjectsLink>
-        <Link href='/projects' passHref>
-          <a title={project.title}>Andere Projekte</a>
-        </Link>
-      </AllProjectsLink>
-    </PageLayout>
+    </React.Fragment>
   );
 }
 
-export default withErrorHander(Project);
+const Project = ({ data }: IProps) => (
+  <PageLayout title={data.title}>
+    <ProjectContent data={data} />
 
-// ################################################################
-// ################################################################
+    <AllProjectsLink>
+      <Link href='/projects' passHref>
+        <a title={data.title}>Andere Projekte</a>
+      </Link>
+      </AllProjectsLink>
+  </PageLayout>
+);
+
+export default withErrorHander(Project);
 
 const Header = styled.h1`
   margin-left: auto;

@@ -52,6 +52,7 @@ const Projects = (props: TResponseData) => {
 export default withErrorHander(Projects);
 
 const GridList = styled.div`
+  margin-top: 1rem;
   margin-left: 1rem;
   margin-right: 1rem;
   max-width: 1400px;

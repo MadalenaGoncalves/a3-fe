@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { font__menuLink } from '../styles/styleguide/typography';
+import { font__menuLink, font__menuLink_tabletUp } from '../styles/styleguide/typography';
 import media from '../styles/media';
 
 export type TMainMenuItem = { title: string, uri: string };
@@ -53,7 +53,7 @@ const MenuNav = styled.nav<MenuNavProps>`
   position: fixed;
   top: 0;
   right: 0;
-  transition: all 0.4s ease-in-out;
+  // transition: all 0.4s ease-in-out;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -81,7 +81,8 @@ const MenuNav = styled.nav<MenuNavProps>`
 `;
 
 const MenuNav__List = styled.ul`
-  padding: 0 2.5rem;
+  padding: 0 1rem;
+  margin: 0 auto;
 
   li {
     list-style: none;
@@ -105,7 +106,7 @@ const MenuNav__List = styled.ul`
       text-align: left;
     }
     a {
-      font-size: 1.1rem;
+      ${font__menuLink_tabletUp};
     }
   `};
 `;

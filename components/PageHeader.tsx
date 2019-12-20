@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import media from '../styles/media';
+import { font__footerLink } from '../styles/styleguide/typography';
 
 export default styled.header`
-  // background: cornflowerblue;
+  background: white;
   
   position: fixed;
   top: 0;
@@ -57,13 +58,12 @@ export const MainContainer = styled.div`
 `;
 
 export const FooterLinks = styled.div`
+  ${font__footerLink};
+
   margin-top: auto;
   margin-left: 15px;
   margin-bottom: 1rem;
   margin-right: 15px;
-  color: currentColor;
-  fontSize: 13px;
-  lineHeight: 1.2;
 
   a {
     display: blocK;
