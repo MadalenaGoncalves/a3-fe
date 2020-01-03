@@ -17,8 +17,3 @@ export const TabContentFlex = styled(TabContent)`
     display: flex;
   }
 `;
-
-export const LightP = styled.p`
-  // color: ${props => props.theme.colors.lightgray};
-  color: rgba(0, 0, 0, 0.54);
-`;

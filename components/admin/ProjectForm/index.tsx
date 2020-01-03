@@ -20,9 +20,10 @@ import ProjectContent from '../../page__project/ProjectContent';
 
 import AdminPageLayout from '../AdminPageLayout';
 import Form from '../Form';
+import PLight from '../PLight';
 import TabPanel from '../TabPanel';
 import ImageListItem from './ImageListItem';
-import { LightP, TabContent, TabContentFlex } from './styles';
+import { TabContent, TabContentFlex } from './styles';
 
 const ProjectForm = (props: TResponseData) => {
   // const onUploadHandler = () => {};
@@ -88,7 +89,7 @@ const ProjectForm = (props: TResponseData) => {
               </List>
             </Form>
           ) : (
-            <LightP>No photos yet...</LightP>
+            <PLight>No photos yet...</PLight>
           )}
         </TabContent>
       </TabPanel>
@@ -102,7 +103,7 @@ const ProjectForm = (props: TResponseData) => {
               </List>
             </Form>
           ) : (
-            <LightP>No designs yet...</LightP>
+            <PLight>No designs yet...</PLight>
           )}
         </TabContent>
       </TabPanel>

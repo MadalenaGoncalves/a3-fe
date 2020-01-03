@@ -51,7 +51,10 @@ export interface TApiContact {
   email?: string,
   fax?: string,
   url?: string,
-  // TODO: photo file data: name, format
+
+  relations?: {
+    photo: TApiImage[],
+  }
 }
 
 // See generics in typescript

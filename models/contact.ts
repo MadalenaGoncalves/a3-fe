@@ -1,4 +1,4 @@
-import { TApiContact } from './serverTypes';
+import { TApiContact, TApiImage } from './serverTypes';
 
 export default class Contact {
   id?: string;
@@ -11,6 +11,7 @@ export default class Contact {
   fax?: string;
   url?: string;
   email?: string;
+  photo?: TApiImage;
 
   constructor(data?: TApiContact) {
     if (!data) {
@@ -28,6 +29,12 @@ export default class Contact {
     if (data.fax) this.fax = data.fax;
     if (data.url) this.url = data.url;
     if (data.email) this.email = data.email;
+    
+    if (data.relations && data.relations.photo) {
+      data.relations.photo.forEach((img: TApiImage) => {
+        this.photo = img;
+      });
+    }
   }
 
   createEmpty() {
@@ -41,6 +48,7 @@ export default class Contact {
     this.fax = undefined;
     this.url = undefined;
     this.email = undefined;
+    this.photo = undefined;
   }
 }
 
