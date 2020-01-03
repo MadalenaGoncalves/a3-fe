@@ -23,9 +23,9 @@ const Form: NextPage<Props> = ({ children, onCancel, onSubmit }) => {
 
       <FormToolbar>
         <Button type="submit" variant="contained" color="primary" onClick={onSubmit}>Save</Button>
-        <Button type="button" color="primary" onClick={onCancel}>Cancel</Button>
+        <Button type="button" variant="outlined" color="primary" onClick={onCancel}>Cancel</Button>
       </FormToolbar>
-  </form>
+    </form>
   );
 }
 
