@@ -3,8 +3,9 @@ import { NextPage } from 'next';
 import Head from 'next/head'
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
+import { ThemeProvider } from 'styled-components'
 
-import { Theme, ThemeProvider, createMuiTheme, makeStyles, createStyles } from '@material-ui/core/styles';
+import { Theme, ThemeProvider as MuiThemeProvider, createMuiTheme, makeStyles, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
@@ -17,6 +18,7 @@ import ApartmentIcon from '@material-ui/icons/Apartment';
 import LogoutIcon from '@material-ui/icons/ExitToApp';
 import PersonIcon from '@material-ui/icons/Person';
 
+import defaultTheme from '../../../styles/theme';
 import { Content, Main } from './styles';
 
 interface HomepageProps {
@@ -82,91 +84,93 @@ const AdminPageLayout: NextPage<HomepageProps> = ({ children, title }) => {
   }
 
   return (
-    <ThemeProvider theme={muiTheme}>
-      <Head>
-        <title>{title}</title>
-        <meta charSet='utf-8' />
-        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-      </Head>
+    <MuiThemeProvider theme={muiTheme}>
+      <ThemeProvider theme={defaultTheme}>
+        <Head>
+          <title>{title}</title>
+          <meta charSet='utf-8' />
+          <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+        </Head>
 
-      <AppBar position="fixed">
-        <Toolbar>
-          <img src="/static/images/logo_transparency.png" />
-          <span style={{ flex: 1 }}></span>
-        </Toolbar>
-      </AppBar>
-      <Toolbar />
+        <AppBar position="fixed">
+          <Toolbar>
+            <img src="/static/images/logo_transparency.png" />
+            <span style={{ flex: 1 }}></span>
+          </Toolbar>
+        </AppBar>
+        <Toolbar />
 
-      <Main>
-        <Drawer
-          open
-          variant="permanent"
-          elevation={0}
-          PaperProps={{
-                className: classes.drawerPaper,
-            }}
-        >
-          <Link href={`${projectsBaseUrl}`} passHref>
-            <MenuItem component="a" className={classes.menuLvl1}>
-              <ApartmentIcon fontSize="small" className={classes.menuIcon} />
-              Projects
-            </MenuItem>
-          </Link>
-          <Link href={`${projectsBaseUrl}/add`} passHref>
-            <MenuItem component="a" className={classes.menuLvl2}>
-              <AddIcon fontSize="small" className={classes.menuIcon} />
-              Add project
-            </MenuItem>
-          </Link>
-          {showSubRoutes &&
-            <Link href={`${projectsBaseUrl}/${projectId}/photos/add`} passHref>
-              <MenuItem component="a" className={classes.menuLvl2}>
-                <AddIcon fontSize="small" className={classes.menuIcon} />
-                Add photos
+        <Main>
+          <Drawer
+            open
+            variant="permanent"
+            elevation={0}
+            PaperProps={{
+                  className: classes.drawerPaper,
+              }}
+          >
+            <Link href={`${projectsBaseUrl}`} passHref>
+              <MenuItem component="a" className={classes.menuLvl1}>
+                <ApartmentIcon fontSize="small" className={classes.menuIcon} />
+                Projects
               </MenuItem>
             </Link>
-          }
-          {showSubRoutes &&
-            <Link href={`${projectsBaseUrl}/${projectId}/designs/add`} passHref>
+            <Link href={`${projectsBaseUrl}/add`} passHref>
               <MenuItem component="a" className={classes.menuLvl2}>
                 <AddIcon fontSize="small" className={classes.menuIcon} />
-                Add designs
+                Add project
               </MenuItem>
             </Link>
-          }
+            {showSubRoutes &&
+              <Link href={`${projectsBaseUrl}/${projectId}/photos/add`} passHref>
+                <MenuItem component="a" className={classes.menuLvl2}>
+                  <AddIcon fontSize="small" className={classes.menuIcon} />
+                  Add photos
+                </MenuItem>
+              </Link>
+            }
+            {showSubRoutes &&
+              <Link href={`${projectsBaseUrl}/${projectId}/designs/add`} passHref>
+                <MenuItem component="a" className={classes.menuLvl2}>
+                  <AddIcon fontSize="small" className={classes.menuIcon} />
+                  Add designs
+                </MenuItem>
+              </Link>
+            }
 
-          <Divider variant="middle" />
+            <Divider variant="middle" />
 
-          <Link href={`${contactsBaseUrl}`} passHref>
-            <MenuItem component="a" className={classes.menuLvl1}>
-              <PersonIcon fontSize="small" className={classes.menuIcon} />
-              Contacts
-            </MenuItem>
-          </Link>
-          <Link href={`${contactsBaseUrl}/add`} passHref>
-            <MenuItem component="a" className={classes.menuLvl2}>
-              <AddIcon fontSize="small" className={classes.menuIcon} />
-              Add contact
-            </MenuItem>
-          </Link>
+            <Link href={`${contactsBaseUrl}`} passHref>
+              <MenuItem component="a" className={classes.menuLvl1}>
+                <PersonIcon fontSize="small" className={classes.menuIcon} />
+                Contacts
+              </MenuItem>
+            </Link>
+            <Link href={`${contactsBaseUrl}/add`} passHref>
+              <MenuItem component="a" className={classes.menuLvl2}>
+                <AddIcon fontSize="small" className={classes.menuIcon} />
+                Add contact
+              </MenuItem>
+            </Link>
 
-          <Divider variant="middle" />
-          
-          <Link href="/logout" passHref>
-            <MenuItem component="a" className={classes.menuLvl1}>
-            <LogoutIcon fontSize="small" className={classes.menuIcon} />
-              Logout
-            </MenuItem>
-          </Link>
-        </Drawer>
+            <Divider variant="middle" />
+            
+            <Link href="/logout" passHref>
+              <MenuItem component="a" className={classes.menuLvl1}>
+              <LogoutIcon fontSize="small" className={classes.menuIcon} />
+                Logout
+              </MenuItem>
+            </Link>
+          </Drawer>
 
-        <Content>
-          <Card>
-            {children}
-          </Card>
-        </Content>
-      </Main>
-    </ThemeProvider>
+          <Content>
+            <Card>
+              {children}
+            </Card>
+          </Content>
+        </Main>
+      </ThemeProvider>
+    </MuiThemeProvider>
   );
 }
 
