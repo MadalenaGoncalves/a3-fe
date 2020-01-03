@@ -1,8 +1,17 @@
 import * as React from 'react';
-import TextField, { TextFieldProps } from '@material-ui/core/TextField';
+import { TextFieldProps } from '@material-ui/core/TextField';
+import { StyledTextField } from './styles';
 
-const TextInput: React.ComponentType<TextFieldProps> = ({ id, label, ...props}) => (
-  <TextField id={id} label={label || id} name={id} {...props} />
-);
+
+const TextInput: React.ComponentType<TextFieldProps> = ({ id, label, ...props}) => {
+  return (
+    <StyledTextField
+      id={id}
+      label={label || id}
+      name={id}
+      {...props}
+    />
+  );
+}
 
 export default TextInput;
