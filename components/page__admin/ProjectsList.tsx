@@ -7,14 +7,16 @@ import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-import CheckIcon from '@material-ui/icons/Check';
 import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Edit';
+import PanoramaIcon from '@material-ui/icons/Panorama';
+
 
 import { TResponseData } from '../../api/types';
-import Project from '../../models/project';
+import { getMainImageUrl } from '../../api/utils';
+import { TApiProjectMinimal } from '../../models/serverTypes';
 
 import AdminPageLayout from './AdminPageLayout';
 
@@ -31,33 +33,31 @@ const ProjectsList = (props: TResponseData) => {
   return (
     <AdminPageLayout>
       <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell size="small"></TableCell>
-            <TableCell align="left" className={classes.titleCol}>Title</TableCell>
-            <TableCell  size="small" align="center">Enabled</TableCell>
-            <TableCell align="center"></TableCell>
-          </TableRow>
-        </TableHead>
         <TableBody>
-          {data && data.map((item: Project) => {
+          {data && data.map((item: TApiProjectMinimal) => {
             return (
               <TableRow key={item.id}>
                 <TableCell size="small">
-                  <Thumbnail src="/static/images/samples/P1110470.JPG" />
+                  {item.imageId
+                    ? <Thumbnail src={getMainImageUrl(item.filename, item.fileformat)} />
+                    : <PanoramaIcon color="disabled" />
+                  }
                 </TableCell>
                 <TableCell align="left" className={classes.titleCol}>{item.title}</TableCell>
-                <TableCell size="small" align="center">
-                  <CheckIcon />
+                <TableCell align="center">
+                  <Link href={`/admin/projects/${item.id}/edit`} passHref>
+                    <a><Button startIcon={<EditIcon />}>Edit</Button></a>
+                  </Link>
                 </TableCell>
                 <TableCell align="center">
-                  <Button startIcon={<EditIcon />}>
-                    <Link href={`/admin/projects/${item.id}/edit`} passHref><a>Edit</a></Link>
-                  </Button>
+                  <Link href={`/admin/projects/${item.id}/edit`} passHref>
+                    <a><Button startIcon={<DeleteIcon />}>Delete</Button></a>
+                  </Link>
                 </TableCell>
               </TableRow>
               );
             })}
+            {!data && <span>No projects yet...</span>}
         </TableBody>
       </Table>
     </AdminPageLayout>
