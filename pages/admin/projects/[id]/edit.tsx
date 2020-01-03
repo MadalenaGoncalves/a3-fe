@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 
 import get from '../../../../api/get';
 import { TResponse, TResponseError } from '../../../../api/types';
-import { API_PATH_PROJECTS } from '../../../../api/constants';
+import { API_PATH_ONE_PROJECT } from '../../../../api/constants';
 import Project from '../../../../models/project';
 
 import ProjectForm from '../../../../components/page__admin/ProjectForm';
@@ -22,7 +22,7 @@ AdminEditProjectPage.getInitialProps = async ({ query }) => {
   const { id } = query;
   
   try {
-    const response = await get(API_PATH_PROJECTS, { id });
+    const response = await get(API_PATH_ONE_PROJECT, { id });
     const data = response.data[0];
 
     const initialProps: Props = {
