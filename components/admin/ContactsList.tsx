@@ -14,6 +14,7 @@ import { getThumbnailUrl } from '../../api/utils';
 import Contact from '../../models/contact';
 
 import AdminPageLayout from './AdminPageLayout';
+import DeleteIconButtonDialog from './DeleteIconButtonDialog';
 import IconButton from './IconButton';
 import PLight from './PLight';
 
@@ -36,42 +37,44 @@ const ContactsList = (props: TResponseData) => {
     <AdminPageLayout>
       {!data && <PLight>No contacts yet...</PLight>}
       {data &&
-        <Table summary="List of contacts">
-        <TableBody>
-          {!data && <PLight>No contacts yet...</PLight>}
-          {data && data.map((item: Contact) => {
-            const name = item.name || "";
-            return (
-              <TableRow key={item.id}>
-                <TableCell size="small" align="center">
-                {item.photo
-                  ? <Avatar className={classes.avatar} alt={name} src={getThumbnailUrl(item.photo)} />
-                  : <AccountCircleOutlinedIcon className={classes.avatar} color="disabled" />
-                }
-                </TableCell>
+        <Table summary="List of contacts" size="small">
+          <TableBody>
+            {!data && <PLight>No contacts yet...</PLight>}
+            {data && data.map((item: Contact) => {
+              const name = item.name || "";
+              return (
+                <TableRow key={item.id}>
+                  <TableCell align="center">
+                  {item.photo
+                    ? <Avatar className={classes.avatar} alt={name} src={getThumbnailUrl(item.photo)} />
+                    : <AccountCircleOutlinedIcon className={classes.avatar} color="disabled" />
+                  }
+                  </TableCell>
 
-                <TableCell align="left" className={classes.mainCol}>
-                  {item.name}<br />
-                  {item.department}<br />
-                  {item.phone}<br />
-                  <span>{item.address}, {item.postcode} {item.city}</span>
-                </TableCell>
+                  <TableCell align="left" className={classes.mainCol}>
+                    {item.name}<br />
+                    {item.department}<br />
+                    {item.phone}<br />
+                    <span>{item.address}, {item.postcode} {item.city}</span>
+                  </TableCell>
 
-                <TableCell align="center">
-                  <Link href={`/admin/contacts/${item.id}/edit`} passHref>
-                    <a><IconButton edit ariaLabel={name} /></a>
-                  </Link>
-                </TableCell>
-                <TableCell align="center">
-                  <Link href={`/admin/contacts/${item.id}/delete`} passHref>
-                    <a><IconButton delete ariaLabel={name} /></a>
-                  </Link>
-                </TableCell>
-              </TableRow>
+                  <TableCell align="center">
+                    <Link href={`/admin/contacts/${item.id}/edit`} passHref>
+                      <a><IconButton edit ariaLabel={name} /></a>
+                    </Link>
+                  </TableCell>
+                  <TableCell align="center">
+                    <DeleteIconButtonDialog
+                      itemDescription={name}
+                      actionUrl={`/admin/contacts/${item.id}/delete`}
+                    />
+                  </TableCell>
+
+                </TableRow>
               );
             })}
-        </TableBody>
-      </Table>
+          </TableBody>
+        </Table>
       }
     </AdminPageLayout>
   );

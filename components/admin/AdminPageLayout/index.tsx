@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { ThemeProvider } from 'styled-components'
 
-import { Theme, ThemeProvider as MuiThemeProvider, createMuiTheme, makeStyles, createStyles } from '@material-ui/core/styles';
+import { Theme, ThemeProvider as MuiThemeProvider, makeStyles, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
@@ -19,23 +19,13 @@ import LogoutIcon from '@material-ui/icons/ExitToApp';
 import PersonIcon from '@material-ui/icons/Person';
 
 import defaultTheme from '../../../styles/theme';
+import muiTheme from '../../../styles/muiTheme';
 import { Content, Main } from './styles';
 
 interface HomepageProps {
   children: any,
   title?: string,
 }
-
-const muiTheme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#283593',
-    },
-    secondary: {
-      main: '#fdd835',
-    },
-  },
-});
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   drawerPaper: {

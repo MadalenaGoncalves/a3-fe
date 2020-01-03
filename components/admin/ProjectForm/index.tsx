@@ -1,9 +1,10 @@
 import * as React from 'react';
 
 import Divider from '@material-ui/core/Divider';
-import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import List from '@material-ui/core/List';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import Tabs from '@material-ui/core/Tabs';
 
 import { TResponseData } from '../../../api/types';
 import { API_PATH_PROJECTS } from '../../../api/constants';
@@ -37,7 +38,7 @@ const ProjectForm = (props: TResponseData) => {
 
   const { inputs, onChangeHandler, onSubmitHandler, onCancelHandler } = useForm(props.data, onSubmit, onCancel);
 
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(1);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     event.preventDefault();
     setValue(newValue);
@@ -84,9 +85,11 @@ const ProjectForm = (props: TResponseData) => {
         <TabContent>
           {inputs.photos ? (
             <Form onCancel={onCancelHandler} onSubmit={onSubmitHandler}>
-              <List>
-                {inputs.photos.map((item: TApiImage) => <ImageListItem key={item.id} image={item} />)}
-              </List>
+              <Table summary="List of photos" size="small">
+                <TableBody>
+                  {inputs.photos.map((item: TApiImage) => <ImageListItem key={item.id} image={item} />)}
+                </TableBody>
+              </Table>
             </Form>
           ) : (
             <PLight>No photos yet...</PLight>
@@ -98,9 +101,11 @@ const ProjectForm = (props: TResponseData) => {
         <TabContent>
           {inputs.images ? (
             <Form onCancel={onCancelHandler} onSubmit={onSubmitHandler}>
-              <List>
-                {inputs.images.map((item: TApiImage) => <ImageListItem key={item.id} image={item} />)}
-              </List>
+              <Table summary="List of designs" size="small">
+                <TableBody>
+                  {inputs.images.map((item: TApiImage) => <ImageListItem key={item.id} image={item} />)}
+                </TableBody>
+              </Table>
             </Form>
           ) : (
             <PLight>No designs yet...</PLight>

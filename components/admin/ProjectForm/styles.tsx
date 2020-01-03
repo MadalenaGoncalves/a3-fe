@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const TabContent = styled.div`
-  padding: 1rem 1.5rem;
-  position: relative;
+  padding-top: ${props => props.theme.spacing._16};
 `;
 
 export const TabContentFlex = styled(TabContent)`

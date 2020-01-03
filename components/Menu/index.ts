@@ -5,5 +5,3 @@ export {
   Menu as default,
   MenuToggleButton,
 };
-
-// export default Menu;

@@ -1,51 +1,66 @@
 import * as React from 'react';
 
-// import GridListTile from '@material-ui/core/GridListTile';
-// import GridListTileBar from '@material-ui/core/GridListTileBar';
-// import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
+import { makeStyles } from '@material-ui/core/styles';
+import Avatar from '@material-ui/core/Avatar';
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
+import IconButton from '@material-ui/core/IconButton';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 
 import { getMainImageUrl } from '../../../../api/utils';
 import { TApiImage } from '../../../../models/serverTypes';
 import useForm from '../../../../hooks/useForm';
 import TextInput from '../../../form/TextInput';
 
-import { Content, Img, ItemToolbar, ListItem } from './styles';
+import DeleteIconButtonDialog from '../../DeleteIconButtonDialog';
+import PLight from '../../PLight';
+
+const useStyles = makeStyles({
+  row: {
+    verticalAlign: 'top',
+  },
+  photo: {
+    width: '250px',
+    height: 'auto',
+  },
+  mainCol: {
+    width: '100%',
+  },
+});
 
 export default (props: any) => {
+  const classes = useStyles();
+
   const image: TApiImage = props.image;
   const onSubmit = () => {}
   const onCancel = () => {}
   const { inputs, onChangeHandler } = useForm(image, onSubmit, onCancel);
 
   return (
-    <ListItem>
-      <ItemToolbar>
-        <IconButton color="primary" aria-label="drag"><DragIndicatorIcon /></IconButton>
-      </ItemToolbar>
-      <Content>
-        <ListItemAvatar>
-          <Img src={getMainImageUrl(image.filename, image.fileformat)} />
-        </ListItemAvatar>
-        <TextInput id="image.id" label="caption" value={inputs.caption || ""} onChange={onChangeHandler} />
-      </Content>
-      <IconButton color="primary" aria-label="delete"><DeleteIcon /></IconButton>
-    </ListItem>
-    // <TextInput id="caption" label="caption" value={inputs.caption} onChange={onChangeHandler} />
+    <TableRow className={classes.row}>
+      <TableCell align="center">
+        <IconButton color="primary" aria-label="drag">
+          <DragIndicatorIcon />
+        </IconButton>
+      </TableCell>
 
-    // <GridListTile>
-    //   <img src={getMainImageUrl(image.filename, image.fileformat)} />
-    //   <GridListTileBar
-    //     title={image.caption}
-    //     actionIcon={
-    //       <IconButton aria-label="delete" className={classes.icon}>
-    //         <DeleteIcon />
-    //       </IconButton>
-    //     }
-    //   />
-    // </GridListTile>
+      <TableCell align="center">
+        <Avatar variant="square" className={classes.photo} src={getMainImageUrl(image.filename, image.fileformat)} />
+      </TableCell>
+
+      <TableCell align="left" className={classes.mainCol}>
+        <div>
+          <PLight>File: {image.filename}.{image.fileformat}</PLight>
+          <TextInput id="image.id" label="caption" value={inputs.caption || ""} onChange={onChangeHandler} />
+        </div>
+      </TableCell>
+
+      <TableCell align="center">
+        <DeleteIconButtonDialog
+          itemDescription={`${image.filename}.${image.fileformat}`}
+          actionUrl={`/admin/image/${image.id}/delete`}
+        />
+      </TableCell>
+    </TableRow>
   );
 };
