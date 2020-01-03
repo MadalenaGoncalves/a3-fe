@@ -3,11 +3,11 @@ import { NextPage } from 'next';
 import Head from 'next/head'
 import Link from 'next/link';
 
-import Menu from '../containers/Menu';
-import MenuTogglerButton from '../containers/MenuToggler';
+import Menu from '../../containers/Menu';
+import MenuTogglerButton from '../../containers/MenuToggler';
 
 import Header, { MainContainer, FooterLinks, MobileFooter } from './PageHeader';
-import JumpToMainLink from './JumpToMainLink';
+import JumpToMainLink from '../JumpToMainLink';
 
 interface HomepageProps {
   children: any,
@@ -25,7 +25,7 @@ const PageLayout: NextPage<HomepageProps> = ({ children, title }) => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <Head>
         <title>{title}</title>
         <meta charSet='utf-8' />
@@ -56,7 +56,7 @@ const PageLayout: NextPage<HomepageProps> = ({ children, title }) => {
           </MobileFooter>
         </main>
       </MainContainer>
-    </React.Fragment>
+    </>
   );
 }
 
