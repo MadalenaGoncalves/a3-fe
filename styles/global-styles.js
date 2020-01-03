@@ -8,26 +8,27 @@ export default createGlobalStyle`
   ${normalize};
 
   body {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
-    font-size: 16px;
+    font-family: ${props => props.theme.fonts.primary};
+    font-weight: ${props => props.theme.fonts.weight.normal};
+    font-size: ${props => props.theme.fonts.size.base}px;
     color: ${props => props.theme.colors.gray};
   }
 
   h1 {
-    font-family: 'Raleway', 'Open Sans', sans-serif;
-    font-weight: 200;
+    font-family: ${props => props.theme.fonts.secondary};
+    font-weight: ${props => props.theme.fonts.weight.lighter};
   }
 
   ul {
     margin: 0;
     padding: 0;
   }
+
   li {
     list-style-type: none;
   }
 
   p {
-    margin-bottom: 1em;
+    margin-bottom: ${props => props.theme.spacing._16};
   }
 `;
