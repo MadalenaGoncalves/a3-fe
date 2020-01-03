@@ -2,34 +2,29 @@ import * as React from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head'
 import Link from 'next/link';
-import Router from 'next/router';
-// import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { Theme, ThemeProvider, createMuiTheme, makeStyles, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
+import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
-// import Icon from '@material-ui/core/Icon';
-// import ListItemIcon from '@material-ui/core/ListItemIcon';
 import MenuItem from '@material-ui/core/MenuItem';
 import Toolbar from '@material-ui/core/Toolbar';
 
-import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
+import AddIcon from '@material-ui/icons/Add';
 import ApartmentIcon from '@material-ui/icons/Apartment';
 import LogoutIcon from '@material-ui/icons/ExitToApp';
 import PersonIcon from '@material-ui/icons/Person';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
-// import Menu from '../Menu';
 
 interface HomepageProps {
   children: any,
   title?: string,
-};
+}
 
-const theme = createMuiTheme({
+const muiTheme = createMuiTheme({
   palette: {
     primary: {
       main: '#283593',
@@ -40,25 +35,29 @@ const theme = createMuiTheme({
   },
 });
 
-// const useStyles = makeStyles((theme: Theme) => createStyles({
-const useStyles = makeStyles({
-  headerButton: {
-    color: '#fff',
-  },
+const useStyles = makeStyles((theme: Theme) => createStyles({
   drawerPaper: {
     position: 'relative',
     height: 'auto',
     overflowX: 'hidden',
     width: '170px',
     backgroundColor: 'transparent',
-    marginTop: '0.5em',
+    marginRight: '0.5em',
     borderRight: 'none',
   },
-});
+  menuLvl1: {
+    paddingLeft: theme.spacing(2),
+  },
+  menuLvl2: {
+    paddingLeft: theme.spacing(4),
+  },
+  menuIcon: {
+    marginRight: theme.spacing(2),
+  }
+}));
 
-const defaultTitle = 'ADMIN - A3 ARCHITEKTEN BERLIN-DÜSSELDORF '
 const AdminPageLayout: NextPage<HomepageProps> = ({ children, title }) => {
-
+  const classes = useStyles();
 
   Router.events.on('routeChangeStart', url => {
     console.log('Navigating to:', url);
@@ -68,15 +67,14 @@ const AdminPageLayout: NextPage<HomepageProps> = ({ children, title }) => {
     console.log('Completed navigation to: ', url);
   });
 
-
-  const classes = useStyles();
-  // const router = useRouter();
-  // const { pathname } = router;
-  // console.log(pathname);
+  const router = useRouter();
+  const projectId = router.query && router.query.id;
+  const showSubRoutes = !!projectId || router.pathname.endsWith("add")
 
   const projectsBaseUrl = "/admin/projects";
   const contactsBaseUrl = "/admin/contacts";
 
+  const defaultTitle = 'ADMIN - A3 ARCHITEKTEN BERLIN-DÜSSELDORF '
   if (title) {
     title = `${title} - ${defaultTitle}`;
   } else {
@@ -84,7 +82,7 @@ const AdminPageLayout: NextPage<HomepageProps> = ({ children, title }) => {
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={muiTheme}>
       <Head>
         <title>{title}</title>
         <meta charSet='utf-8' />
@@ -95,13 +93,13 @@ const AdminPageLayout: NextPage<HomepageProps> = ({ children, title }) => {
         <Toolbar>
           <img src="/static/images/logo_transparency.png" />
           <span style={{ flex: 1 }}></span>
-          <Button startIcon={<PlaylistAddIcon />} className={classes.headerButton}>
+          {/* <Button startIcon={<PlaylistAddIcon />} className={classes.headerButton}>
             <Link href={`${projectsBaseUrl}/add`} passHref><HeaderLink>Add project</HeaderLink></Link>
           </Button>
 
           <Button startIcon={<PersonAddIcon />} className={classes.headerButton}>
             <Link href={`${contactsBaseUrl}/add`} passHref><HeaderLink>Add contact</HeaderLink></Link>
-          </Button>
+          </Button> */}
         </Toolbar>
       </AppBar>
       <Toolbar />
@@ -116,20 +114,54 @@ const AdminPageLayout: NextPage<HomepageProps> = ({ children, title }) => {
             }}
         >
           <Link href={`${projectsBaseUrl}`} passHref>
-            <MenuItem component="a">
-              <ApartmentIcon fontSize="small" />
+            <MenuItem component="a" className={classes.menuLvl1}>
+              <ApartmentIcon fontSize="small" className={classes.menuIcon} />
               Projects
             </MenuItem>
           </Link>
+          <Link href={`${projectsBaseUrl}/add`} passHref>
+            <MenuItem component="a" className={classes.menuLvl2}>
+              <AddIcon fontSize="small" className={classes.menuIcon} />
+              Add project
+            </MenuItem>
+          </Link>
+          {showSubRoutes &&
+            <Link href={`${projectsBaseUrl}/${projectId}/photos/add`} passHref>
+              <MenuItem component="a" className={classes.menuLvl2}>
+                <AddIcon fontSize="small" className={classes.menuIcon} />
+                Add photos
+              </MenuItem>
+            </Link>
+          }
+          {showSubRoutes &&
+            <Link href={`${projectsBaseUrl}/${projectId}/designs/add`} passHref>
+              <MenuItem component="a" className={classes.menuLvl2}>
+                <AddIcon fontSize="small" className={classes.menuIcon} />
+                Add designs
+              </MenuItem>
+            </Link>
+          }
+
+          <Divider variant="middle" />
+
           <Link href={`${contactsBaseUrl}`} passHref>
-            <MenuItem component="a">
-              <PersonIcon fontSize="small" />
+            <MenuItem component="a" className={classes.menuLvl1}>
+              <PersonIcon fontSize="small" className={classes.menuIcon} />
               Contacts
             </MenuItem>
           </Link>
+          <Link href={`${contactsBaseUrl}/add`} passHref>
+            <MenuItem component="a" className={classes.menuLvl2}>
+              <AddIcon fontSize="small" className={classes.menuIcon} />
+              Add contact
+            </MenuItem>
+          </Link>
+
+          <Divider variant="middle" />
+          
           <Link href="/logout" passHref>
-            <MenuItem component="a">
-            <LogoutIcon fontSize="small" />
+            <MenuItem component="a" className={classes.menuLvl1}>
+            <LogoutIcon fontSize="small" className={classes.menuIcon} />
               Logout
             </MenuItem>
           </Link>
@@ -157,11 +189,4 @@ const Content = styled.div`
   flex-grow: 1;
   padding-right: 1rem;
   margin-bottom: 1rem;
-`;
-
-const HeaderLink = styled.a`
-  color: inherit;
-  &:hover {
-    text-decoration: none;
-  }
 `;
