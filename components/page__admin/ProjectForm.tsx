@@ -4,21 +4,25 @@ import styled from 'styled-components';
 import Divider from '@material-ui/core/Divider';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import List from '@material-ui/core/List';
 
 import { TResponseData } from '../../api/types';
+import { API_PATH_PROJECTS } from '../../api/constants';
+import patch from '../../api/patch';
 
 import useForm from '../../hooks/useForm';
+
+import { TApiImage } from '../../models/serverTypes';
 
 // import FileInput from '../form/FileInput';
 import TextInput from '../form/TextInput';
 
+import { ProjectContent } from '../page__project/Project';
+
 import AdminPageLayout from './AdminPageLayout';
 import Form from './Form';
 import TabPanel from './TabPanel';
-
-import { API_PATH_PROJECTS } from '../../api/constants';
-import patch from '../../api/patch';
-
+import ImageListItem from './ImageListItem';
 
 const ProjectForm = (props: TResponseData) => {
   // const onUploadHandler = () => {};
@@ -32,7 +36,7 @@ const ProjectForm = (props: TResponseData) => {
 
   const { inputs, onChangeHandler, onSubmitHandler, onCancelHandler } = useForm(props.data, onSubmit, onCancel);
 
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(1);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     event.preventDefault();
     setValue(newValue);
@@ -48,13 +52,15 @@ const ProjectForm = (props: TResponseData) => {
         onChange={handleChange}
       >
         <Tab label="Details" />
-        <Tab label="Images" />
+        <Tab label="Photos" />
+        <Tab label="Designs" />
+        <Tab label="Preview" />
       </Tabs>
 
       <Divider />
       
       <TabPanel value={value} index={0}>
-        <ContentWrapper>
+        <TabContentFlex>
           <Form onCancel={onCancelHandler} onSubmit={onSubmitHandler}>
             <TextInput id="title" value={inputs.title} onChange={onChangeHandler} required multiline />
             <TextInput id="description" value={inputs.description} onChange={onChangeHandler} multiline />
@@ -70,13 +76,40 @@ const ProjectForm = (props: TResponseData) => {
             <TextInput id="end_year" label="End year" value={inputs.end_year} onChange={onChangeHandler} />
             <TextInput id="phases" value={inputs.phases} onChange={onChangeHandler} />
           </Form>
-        </ContentWrapper>
+        </TabContentFlex>
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        <ContentWrapper>images here</ContentWrapper>
+        <TabContent>
+          {inputs.photos ? (
+            <Form onCancel={onCancelHandler} onSubmit={onSubmitHandler}>
+              <List>
+                {inputs.photos.map((item: TApiImage) => <ImageListItem key={item.id} image={item} />)}
+              </List>
+            </Form>
+          ) : (
+            <LightP>No photos yet...</LightP>
+          )}
+        </TabContent>
       </TabPanel>
-      
+
+      <TabPanel value={value} index={2}>
+        <TabContent>
+          {inputs.images ? (
+            <Form onCancel={onCancelHandler} onSubmit={onSubmitHandler}>
+              <List>
+                {inputs.images.map((item: TApiImage) => <ImageListItem key={item.id} image={item} />)}
+              </List>
+            </Form>
+          ) : (
+            <LightP>No designs yet...</LightP>
+          )}
+        </TabContent>
+      </TabPanel>
+
+      <TabPanel value={value} index={3}>
+        <ProjectContent {...props} />
+      </TabPanel>
     </AdminPageLayout>
   );
 }
@@ -84,10 +117,13 @@ const ProjectForm = (props: TResponseData) => {
 export default ProjectForm;
 
 
-const ContentWrapper = styled.div`
+const TabContent = styled.div`
+  padding: 1rem 1.5rem;
+  position: relative;
+`;
+const TabContentFlex = styled(TabContent)`
   flex: 1 0 auto;
   display: flex;
-  padding: 2rem 1.5rem;
 
   form {
     flex: 1;
@@ -96,7 +132,8 @@ const ContentWrapper = styled.div`
     margin-bottom: 2rem;
     display: flex;
   }
-  label {
-    text-transform: uppercase;
-  }
+`;
+const LightP = styled.p`
+  // color: ${props => props.theme.colors.lightgray};
+  color: rgba(0, 0, 0, 0.54);
 `;
