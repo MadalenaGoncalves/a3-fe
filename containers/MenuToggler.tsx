@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { doCloseMenu, doOpenMenu, doToggleMenu } from '../state/menu';
 
-import Button from '../components/MenuToggleButton';
+import { MenuToggleButton } from '../components/Menu';
 
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>;
 
 const MenuToggler: React.FC<Props> = ({ isOpen, open, close, toggle }) => {
   return (
-    <Button isActive={isOpen} onOpen={open} onClose={close} onToggle={toggle} />
+    <MenuToggleButton isActive={isOpen} onOpen={open} onClose={close} onToggle={toggle} />
   );
 }
 

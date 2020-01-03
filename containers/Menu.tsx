@@ -8,7 +8,7 @@ import { doCloseMenu } from '../state/menu';
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>;
 
 const MainMenu: React.FunctionComponent<Props> = ({ isOpen, close }) => {
-  return (<Menu isOpen={isOpen} onClose={close} />);
+  return <Menu isOpen={isOpen} onClose={close} />;
 }
 
 const mapStateToProps = (state: any /*, ownProps*/) => ({
