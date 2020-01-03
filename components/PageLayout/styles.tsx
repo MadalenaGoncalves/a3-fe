@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import media from '../../styles/media';
 import { font__footerLink } from '../../styles/styleguide/typography';
 
-export default styled.header`
+export const Header = styled.header`
   background: white;
   height: ${props => props.theme.toRem(60)};
   padding: 0 ${(props: any) => props.theme.spacing._16};
@@ -37,6 +37,12 @@ export default styled.header`
       margin-left: ${(props: any) => props.theme.spacing._15};
     }
   `};
+`;
+
+export const JumpToMainLink = styled.a`
+  position: absolute;
+  left: -999999px;
+  top: -999999px;
 `;
 
 export const MainContainer = styled.div`

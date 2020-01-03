@@ -5,9 +5,7 @@ import Link from 'next/link';
 
 import Menu from '../../containers/Menu';
 import MenuTogglerButton from '../../containers/MenuToggler';
-
-import Header, { MainContainer, FooterLinks, MobileFooter } from './PageHeader';
-import JumpToMainLink from '../JumpToMainLink';
+import { Header, JumpToMainLink, MainContainer, FooterLinks, MobileFooter } from './styles';
 
 interface HomepageProps {
   children: any,

@@ -1,11 +1,9 @@
 import PageLayout from './PageLayout';
-import PageHeader from './PageHeader';
 import PageSection from './PageSection';
-import PageTitle from './PageTitle';
+import ErrorPage from './ErrorPage';
 
 export {
   PageLayout as default,
-  PageHeader,
   PageSection,
-  PageTitle,
+  ErrorPage,
 };
