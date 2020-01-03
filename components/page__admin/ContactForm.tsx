@@ -84,10 +84,6 @@ const FormSection = styled.div`
   .MuiFormControl-root {
     margin-right: 1rem;
   }
-
-  label {
-    text-transform: uppercase;
-  }
 `;
 
 const AvatarSection = styled.div`

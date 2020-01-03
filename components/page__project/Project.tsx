@@ -7,8 +7,7 @@ import withErrorHander from '../../hocs/withErrorHander';
 import CProject from '../../models/project';
 import { TApiImage } from '../../models/serverTypes';
 
-import PageLayout from '../PageLayout';
-import PageSection from '../PageSection';
+import PageLayout, { PageSection } from '../PageLayout';
 
 import { section__vertical_spacing } from '../../styles/styleguide/spacing';
 import { font__projectOtherProjects } from '../../styles/styleguide/typography';
@@ -25,15 +24,15 @@ export const ProjectContent = (props: IProps) => {
   const project = props.data;
 
   const renderAddress = () => (
-    <React.Fragment>
+    <>
       {project.addressLine1}
       {project.addressLine1 && project.addressLine2 && ', '}
       {project.addressLine2}
-    </React.Fragment>
+    </>
    );
 
   return (
-    <React.Fragment>
+    <>
       <PageSection>
         <Header>{project.title}</Header>
 
@@ -72,7 +71,7 @@ export const ProjectContent = (props: IProps) => {
           ))}
         </DesignGallery>
       }
-    </React.Fragment>
+    </>
   );
 }
 
