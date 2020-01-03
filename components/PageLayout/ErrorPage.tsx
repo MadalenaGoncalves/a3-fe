@@ -1,4 +1,4 @@
-import { TResponseError } from '../api/types';
+import { TResponseError } from '../../api/types';
 
 import PageLayout from './PageLayout';
 

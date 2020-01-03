@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { TResponseData, TResponseError } from '../api/types';
-import ErrorMessage from '../components/ErrorMessage';
+import ErrorPage from '../components/PageLayout/ErrorPage';
 
 // https://codeburst.io/react-higher-order-components-in-typescript-made-simple-6f9b55691af1
 // InjectedProps are props the HOC injects into the WrappedComponent
@@ -33,7 +33,7 @@ function withErrorHandler<OriginalProps extends object> (
     render() {
       const { error, ...rest } = this.props;
       if (error) {
-        return <ErrorMessage {...error as TResponseError} />;
+        return <ErrorPage {...error as TResponseError} />;
       }
       return <Page {...rest } />
     }
