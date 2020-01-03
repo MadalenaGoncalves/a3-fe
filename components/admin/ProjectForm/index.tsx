@@ -1,28 +1,28 @@
 import * as React from 'react';
-import styled from 'styled-components';
 
 import Divider from '@material-ui/core/Divider';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import List from '@material-ui/core/List';
 
-import { TResponseData } from '../../api/types';
-import { API_PATH_PROJECTS } from '../../api/constants';
-import patch from '../../api/patch';
+import { TResponseData } from '../../../api/types';
+import { API_PATH_PROJECTS } from '../../../api/constants';
+import patch from '../../../api/patch';
 
-import useForm from '../../hooks/useForm';
+import useForm from '../../../hooks/useForm';
 
-import { TApiImage } from '../../models/serverTypes';
+import { TApiImage } from '../../../models/serverTypes';
 
 // import FileInput from '../form/FileInput';
-import TextInput from '../form/TextInput';
+import TextInput from '../../form/TextInput';
 
-import { ProjectContent } from '../page__project/Project';
+import ProjectContent from '../../page__project/ProjectContent';
 
-import AdminPageLayout from './AdminPageLayout';
-import Form from './Form';
-import TabPanel from './TabPanel';
+import AdminPageLayout from '../AdminPageLayout';
+import Form from '../Form';
+import TabPanel from '../TabPanel';
 import ImageListItem from './ImageListItem';
+import { LightP, TabContent, TabContentFlex } from './styles';
 
 const ProjectForm = (props: TResponseData) => {
   // const onUploadHandler = () => {};
@@ -36,7 +36,7 @@ const ProjectForm = (props: TResponseData) => {
 
   const { inputs, onChangeHandler, onSubmitHandler, onCancelHandler } = useForm(props.data, onSubmit, onCancel);
 
-  const [value, setValue] = React.useState(1);
+  const [value, setValue] = React.useState(0);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     event.preventDefault();
     setValue(newValue);
@@ -115,25 +115,3 @@ const ProjectForm = (props: TResponseData) => {
 }
 // withError
 export default ProjectForm;
-
-
-const TabContent = styled.div`
-  padding: 1rem 1.5rem;
-  position: relative;
-`;
-const TabContentFlex = styled(TabContent)`
-  flex: 1 0 auto;
-  display: flex;
-
-  form {
-    flex: 1;
-  }
-  form > div {
-    margin-bottom: 2rem;
-    display: flex;
-  }
-`;
-const LightP = styled.p`
-  // color: ${props => props.theme.colors.lightgray};
-  color: rgba(0, 0, 0, 0.54);
-`;

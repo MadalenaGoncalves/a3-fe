@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 
 import { TResponse, TResponseError } from '../../../api/types';
-import ContactForm from '../../../components/page__admin/ContactForm';
+import ContactForm from '../../../components/admin/ContactsForm';
 import Contact from '../../../models/contact';
 
 const AdminAddContactPage: NextPage<TResponse> = (props) => {

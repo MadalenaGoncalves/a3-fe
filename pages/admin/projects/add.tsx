@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 
 import { TResponse, TResponseError } from '../../../api/types';
-import ProjectForm from '../../../components/page__admin/ProjectForm';
+import ProjectForm from '../../../components/admin/ProjectForm';
 import Project from '../../../models/project';
 
 const AdminAddProjectPage: NextPage<TResponse> = (props) => {

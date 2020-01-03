@@ -5,7 +5,7 @@ import { TResponse, TResponseError } from '../../../../api/types';
 import { API_PATH_ONE_CONTACT } from '../../../../api/constants';
 import Contact from '../../../../models/contact';
 
-import ContactForm from '../../../../components/page__admin/ContactForm';
+import ContactForm from '../../../../components/admin/ContactsForm';
 
 interface Props {
   data: Contact,

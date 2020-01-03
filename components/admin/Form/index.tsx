@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NextPage } from 'next';
-import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
+import { FormToolbar } from './styles';
 
 interface Props {
   children: any,
@@ -10,11 +10,6 @@ interface Props {
   onSubmit: (event: any) => void,
 };
 
-const FormToolbar = styled.div`
-  button {
-    margin-right: 1.5rem;
-  }
-`;
 
 const Form: NextPage<Props> = ({ children, onCancel, onSubmit }) => {
   return (

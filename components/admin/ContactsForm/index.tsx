@@ -1,21 +1,16 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 
-import { TResponseData } from '../../api/types';
-// import Contact from '../../models/contact';
-
-import useForm from '../../hooks/useForm';
-
-import FileInput from '../form/FileInput';
-import TextInput from '../form/TextInput';
-
-import AdminPageLayout from './AdminPageLayout';
-import Form from './Form';
-
-import { API_PATH_ONE_CONTACT } from '../../api/constants';
-import patch from '../../api/patch';
+import { TResponseData } from '../../../api/types';
+import useForm from '../../../hooks/useForm';
+import FileInput from '../../form/FileInput';
+import TextInput from '../../form/TextInput';
+import AdminPageLayout from '../AdminPageLayout';
+import Form from '../Form';
+import { API_PATH_ONE_CONTACT } from '../../../api/constants';
+import patch from '../../../api/patch';
+import { AvatarSection, FormSection, MainContentWrapper } from './styles';
 
 const useStyles = makeStyles({
   avatar: {
@@ -66,29 +61,3 @@ const ContactsForm = (props: TResponseData) => {
 
 // withError
 export default ContactsForm;
-
-const MainContentWrapper = styled.div`
-  flex: 1 0 auto;
-  display: flex;
-  padding: 2rem 1.5rem;
-`;
-
-const FormSection = styled.div`
-  flex: 1;
-
-  form > div {
-    margin-bottom: 2rem;
-    display: flex;
-  }
-  
-  .MuiFormControl-root {
-    margin-right: 1rem;
-  }
-`;
-
-const AvatarSection = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;

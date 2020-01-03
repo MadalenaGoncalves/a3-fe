@@ -1,12 +1,11 @@
 import * as React from 'react';
 import Link from 'next/link';
-import styled from 'styled-components';
 
-import { TResponseData } from '../../api/types';
-import Contact from '../../models/contact';
+import { TResponseData } from '../../../api/types';
+import Contact from '../../../models/contact';
 
-import AdminPageLayout from './AdminPageLayout';
-import ListItem from './ListItem';
+import AdminPageLayout from '../AdminPageLayout';
+import { List, ListItem, Thumbnail, Toolbar, SmallIcon } from './styles';
 
 const ContactsList = (props: TResponseData) => {
   const data = props.data;
@@ -43,28 +42,3 @@ const ContactsList = (props: TResponseData) => {
 
 export default ContactsList;
 
-const List = styled.ul`
-  flex: 1 1 auto;
-`;
-const Thumbnail = styled.img`
-  display: inline-block;
-  width: 50px;
-  height: auto;
-  margin-right: 1.5rem;
-`;
-
-const Toolbar = styled.div`
-  display: flex;
-  align-items: center;
-  a {
-    padding: 0 1.5rem;
-    display: inline-block;
-    &:last-child {
-      padding-right: 0;
-    }
-  }
-`;
-const SmallIcon = styled.img`
-  width: auto;
-  height: 25px;
-`;

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styled from 'styled-components';
 
 // import GridListTile from '@material-ui/core/GridListTile';
 // import GridListTileBar from '@material-ui/core/GridListTileBar';
@@ -9,11 +8,12 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
 
-import { getMainImageUrl } from '../../api/utils';
-import { TApiImage } from '../../models/serverTypes';
-import useForm from '../../hooks/useForm';
-import TextInput from '../form/TextInput';
+import { getMainImageUrl } from '../../../../api/utils';
+import { TApiImage } from '../../../../models/serverTypes';
+import useForm from '../../../../hooks/useForm';
+import TextInput from '../../../form/TextInput';
 
+import { Content, Img, ItemToolbar, ListItem } from './styles';
 
 export default (props: any) => {
   const image: TApiImage = props.image;
@@ -49,38 +49,3 @@ export default (props: any) => {
     // </GridListTile>
   );
 };
-
-const ListItem = styled.li`
-  margin: 0 -1.5rem;
-  // background: rgba(0,0,0,.04);
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-  &:last-child {
-    border-bottom: none;
-  }
-
-  display: flex;
-  flex-flow: row no-wrap;
-  align-items: flex-start;
-  justify-Wrapper: flex-start;
-`;
-
-const ItemToolbar = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-right: 1rem;
-`;
-
-const Content = styled.div`
-  display: flex;
-  // border-left: 1px solid rgba(0,0,0,0.1);
-  padding: 1rem;
-
-  > * {
-    margin-right: 1rem;
-  }
-`;
-
-const Img = styled.img`
-  width: 250px;
-  height: auto;
-`;

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Link from 'next/link';
-import styled from 'styled-components';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -10,15 +9,16 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
 import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 import PanoramaIcon from '@material-ui/icons/Panorama';
 
 
-import { TResponseData } from '../../api/types';
-import { getMainImageUrl } from '../../api/utils';
-import { TApiProjectMinimal } from '../../models/serverTypes';
+import { TResponseData } from '../../../api/types';
+import { getMainImageUrl } from '../../../api/utils';
+import { TApiProjectMinimal } from '../../../models/serverTypes';
 
-import AdminPageLayout from './AdminPageLayout';
+import AdminPageLayout from '../AdminPageLayout';
+import { Thumbnail } from './styles';
 
 const useStyles = makeStyles({
   titleCol: {
@@ -50,7 +50,7 @@ const ProjectsList = (props: TResponseData) => {
                   </Link>
                 </TableCell>
                 <TableCell align="center">
-                  <Link href={`/admin/projects/${item.id}/edit`} passHref>
+                  <Link href={`/admin/projects/${item.id}/delete`} passHref>
                     <a><Button startIcon={<DeleteIcon />}>Delete</Button></a>
                   </Link>
                 </TableCell>
@@ -65,9 +65,3 @@ const ProjectsList = (props: TResponseData) => {
 }
 
 export default ProjectsList;
-
-const Thumbnail  = styled.img`
-  height: 70px;
-  width: auto;
-  vertical-align: middle;
-`;

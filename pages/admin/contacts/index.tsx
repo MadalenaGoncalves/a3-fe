@@ -4,7 +4,7 @@ import get from '../../../api/get';
 import { TResponse } from '../../../api/types';
 import { API_PATH_CONTACTS } from '../../../api/constants';
 
-import List from '../../../components/page__admin/ContactsList';
+import List from '../../../components/admin/ContactsList';
 
 const AdminContactListPage: NextPage<TResponse> = (props) => {
   return (

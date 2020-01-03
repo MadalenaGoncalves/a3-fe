@@ -3,7 +3,6 @@ import { NextPage } from 'next';
 import Head from 'next/head'
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
-import styled from 'styled-components';
 
 import { Theme, ThemeProvider, createMuiTheme, makeStyles, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -18,6 +17,7 @@ import ApartmentIcon from '@material-ui/icons/Apartment';
 import LogoutIcon from '@material-ui/icons/ExitToApp';
 import PersonIcon from '@material-ui/icons/Person';
 
+import { Content, Main } from './styles';
 
 interface HomepageProps {
   children: any,
@@ -93,13 +93,6 @@ const AdminPageLayout: NextPage<HomepageProps> = ({ children, title }) => {
         <Toolbar>
           <img src="/static/images/logo_transparency.png" />
           <span style={{ flex: 1 }}></span>
-          {/* <Button startIcon={<PlaylistAddIcon />} className={classes.headerButton}>
-            <Link href={`${projectsBaseUrl}/add`} passHref><HeaderLink>Add project</HeaderLink></Link>
-          </Button>
-
-          <Button startIcon={<PersonAddIcon />} className={classes.headerButton}>
-            <Link href={`${contactsBaseUrl}/add`} passHref><HeaderLink>Add contact</HeaderLink></Link>
-          </Button> */}
         </Toolbar>
       </AppBar>
       <Toolbar />
@@ -178,15 +171,3 @@ const AdminPageLayout: NextPage<HomepageProps> = ({ children, title }) => {
 }
 
 export default AdminPageLayout;
-
-const Main = styled.main`
-  margin-top: 1rem;
-  display: flex;
-  flex-grow: 1;
-`;
-
-const Content = styled.div`
-  flex-grow: 1;
-  padding-right: 1rem;
-  margin-bottom: 1rem;
-`;
