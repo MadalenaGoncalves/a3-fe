@@ -1,4 +1,4 @@
-import { TApiContact, TApiImage } from './serverTypes';
+import { Contact as ContactResponse, Image } from './response';
 
 export default class Contact {
   id?: string;
@@ -11,9 +11,9 @@ export default class Contact {
   fax?: string;
   url?: string;
   email?: string;
-  photo?: TApiImage;
+  photo?: Image;
 
-  constructor(data?: TApiContact) {
+  constructor(data?: ContactResponse) {
     if (!data) {
       this.createEmpty();
       return;
@@ -31,7 +31,7 @@ export default class Contact {
     if (data.email) this.email = data.email;
     
     if (data.relations && data.relations.photo) {
-      data.relations.photo.forEach((img: TApiImage) => {
+      data.relations.photo.forEach((img: Image) => {
         this.photo = img;
       });
     }

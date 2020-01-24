@@ -1,21 +1,16 @@
 import fetch from 'isomorphic-fetch';
-import { TResponse } from './types';
+import { ServerResponse } from '../models/response';
 
 
-function get(path: string, query: any = null): Promise<TResponse> {
+function get(path: string, query: any = null): Promise<ServerResponse> {
   let url = `${process.env.API_URL}${path}`;
   if (query) {
     const { id } = query;
     url = url.replace(':id', id);
   }
 
-  console.log('@api ', url, query);
-
+  console.log('@get ', url, query);
   return new Promise(async function (resolve, reject) {
-    const response: TResponse = {
-      data: null,
-    };
-
     // Uncomment to test api errors -----
     // response.error = {
     //   code: 500,
@@ -24,8 +19,7 @@ function get(path: string, query: any = null): Promise<TResponse> {
     // reject(response);
     // ----- Uncomment to test api errors
 
-    let fetchResponse: any;
-
+    let fetchResponse: Response;
     try {
       fetchResponse = await fetch(url);
       // console.log('-------------------START------------------------');
@@ -33,26 +27,24 @@ function get(path: string, query: any = null): Promise<TResponse> {
       // console.log('--------------------END-------------------------');
 
       if (fetchResponse && fetchResponse.ok) {
-        const { data } = await fetchResponse.json();
-        response.data = data;
-
+        const response = await fetchResponse.json();
         resolve(response);
 
       } else {
         const { status, statusText } = fetchResponse;
-        response.error = {
+        const error = {
           code: status,
           message: statusText
         }
-        reject(response);
+        reject(error);
       }
     } catch (err) {
       console.log('Error fetching from', url);
-      response.error = {
+      const error = {
         code: 500,
         message: err
       };
-      reject(response);
+      reject(error);
     }
   });
 }

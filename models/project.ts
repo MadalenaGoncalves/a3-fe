@@ -1,6 +1,8 @@
-import { TApiImage, TApiProject } from './serverTypes';
+import { Image, Project as ProjectResponse } from './response';
 
 export default class Project {
+  // response?: ProjectResponse;
+  
   id?: string;
   title?: string;
   description?: string;
@@ -14,13 +16,13 @@ export default class Project {
   date?: string;
   phases?: string;
 
-  photos?: TApiImage[];
-  images?: TApiImage[];
+  photos?: Image[];
+  images?: Image[];
 
-  mainPhoto?: TApiImage;
+  mainPhoto?: Image;
 
   // TODO: refactor code: data should not be optional
-  constructor(data?: TApiProject) {
+  constructor(data?: ProjectResponse) {
     if (!data) {
       this.createEmpty();
       return;
@@ -42,11 +44,11 @@ export default class Project {
     this.phases = this.getPhasesStr(data.phases);
     
     if (data.relations && data.relations.images) {
-      const photos: TApiImage[] = [];
-      const images: TApiImage[] = [];
+      const photos: Image[] = [];
+      const images: Image[] = [];
 
       // TODO: keep in mind that order is important
-      data.relations.images.forEach((img: TApiImage) => {
+      data.relations.images.forEach((img: Image) => {
         // check: ! - typescript non-null assertion operator
         if (img.is_photo) {
           photos!.push(img);

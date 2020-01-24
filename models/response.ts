@@ -1,8 +1,23 @@
+export type ResponseData = 
+  Project | Project[] | ProjectMinimal[] | Contact | Contact[];
+
+export type ResponseError = {
+  code: number,
+  message: string
+};
+
+export type ServerResponse = ResponseData | ResponseError;
+
+export function isError(r: ServerResponse): r is ResponseError {
+  return (r as ResponseError).code !== undefined;
+}
+
+
 /*
-  Here are described the types expected from the server
+  Here are described the types expected  from the server
 */
 
-export interface TApiImage {
+export interface Image {
   id: string,
   caption?: string,
   author?: string,
@@ -11,7 +26,7 @@ export interface TApiImage {
   is_photo: boolean,
 }
 
-export interface TApiProject {
+export interface Project {
   id: string,
   title: string,
   description?: string,
@@ -28,11 +43,11 @@ export interface TApiProject {
   image?: string,
 
   relations?: {
-    images: TApiImage[],
+    images: Image[],
   }
 }
 
-export interface TApiProjectMinimal {
+export interface ProjectMinimal {
   id: string,
   title: string,
   imageId: string,
@@ -40,7 +55,7 @@ export interface TApiProjectMinimal {
   fileformat: string
 }
 
-export interface TApiContact {
+export interface Contact {
   id: string,
   department?: string,
   name: string,
@@ -53,7 +68,7 @@ export interface TApiContact {
   url?: string,
 
   relations?: {
-    photo: TApiImage[],
+    photo: Image[],
   }
 }
 
