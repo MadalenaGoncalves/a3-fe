@@ -1,18 +1,21 @@
 import { NextPage } from 'next';
 
 import get from '../../../../api/get';
+import { ServerResponse, ResponseData, Project as ResponseProject } from '../../../../models/response';
 import { API_PROJECT_ONE } from '../../../../api/constants';
-import { ServerResponse, ResponseData, Project } from '../../../../models/response';
 
 import ErrorHandler from '../../../../components/ErrorHandler';
 import ProjectForm from '../../../../components/admin/ProjectForm';
+import Project from '../../../../models/project';
 
 const AdminEditProjectPage: NextPage<ServerResponse> = (props) => {
+  const renderHandler = (response: ResponseData) => {
+    const project = new Project(response.data as ResponseProject)
+    return (<ProjectForm project={project} />);
+  }
+
   return (
-    <ErrorHandler
-      render={(data: ResponseData) => (<ProjectForm {...data as Project} />)}
-      response={props}
-    />
+    <ErrorHandler response={props} render={renderHandler} />
   );
 }
 

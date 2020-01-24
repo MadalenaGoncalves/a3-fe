@@ -8,7 +8,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
 import { getMainImageUrl } from '../../../../api/utils';
-import { TApiImage } from '../../../../models/serverTypes';
+import { Image } from '../../../../models/response';
 import useForm from '../../../../hooks/useForm';
 import TextInput from '../../../form/TextInput';
 
@@ -28,10 +28,13 @@ const useStyles = makeStyles({
   },
 });
 
-export default (props: any) => {
+type Props = {
+  image: Image
+}
+export default (props: Props) => {
   const classes = useStyles();
-
-  const image: TApiImage = props.image;
+  const { image } = props;
+  
   const onSubmit = () => {}
   const onCancel = () => {}
   const { inputs, onChangeHandler } = useForm(image, onSubmit, onCancel);

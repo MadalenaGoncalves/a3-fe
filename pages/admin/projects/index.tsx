@@ -8,11 +8,12 @@ import ErrorHandler from '../../../components/ErrorHandler';
 import List from '../../../components/admin/ProjectsList';
 
 const AdminProjectsListPage: NextPage<ServerResponse> = (props) => {
+  const renderHandler = (response: ResponseData) => {
+    return (<List projects={response.data as ProjectMinimal[]} />);
+  }
+
   return (
-    <ErrorHandler
-      render={(data: ResponseData) => (<List {...data as ProjectMinimal[]} />)}
-      response={props}
-    />
+    <ErrorHandler response={props} render={renderHandler} />
   );
 }
 

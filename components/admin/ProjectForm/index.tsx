@@ -6,13 +6,12 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import Tabs from '@material-ui/core/Tabs';
 
-import { TResponseData } from '../../../api/types';
-import { API_PATH_PROJECTS } from '../../../api/constants';
+import { Image } from '../../../models/response';
+import Project from '../../../models/project';
+import { API_PROJECT_ONE } from '../../../api/constants';
 import patch from '../../../api/patch';
 
 import useForm from '../../../hooks/useForm';
-
-import { TApiImage } from '../../../models/serverTypes';
 
 // import FileInput from '../form/FileInput';
 import TextInput from '../../form/TextInput';
@@ -26,17 +25,22 @@ import TabPanel from '../TabPanel';
 import ImageListItem from './ImageListItem';
 import { TabContent, TabContentFlex } from './styles';
 
-const ProjectForm = (props: TResponseData) => {
+type Props = {
+  add?: boolean,
+  project: Project
+}
+
+const ProjectForm = (props: Props) => {
   // const onUploadHandler = () => {};
   
   const onSubmit = (values: any) => {
     // VALIDATE
-    patch(API_PATH_PROJECTS, values);
+    patch(API_PROJECT_ONE, values);
   }
 
   const onCancel = () => {}
 
-  const { inputs, onChangeHandler, onSubmitHandler, onCancelHandler } = useForm(props.data, onSubmit, onCancel);
+  const { inputs, onChangeHandler, onSubmitHandler, onCancelHandler } = useForm(props.project, onSubmit, onCancel);
 
   const [value, setValue] = React.useState(1);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -87,7 +91,7 @@ const ProjectForm = (props: TResponseData) => {
             <Form onCancel={onCancelHandler} onSubmit={onSubmitHandler}>
               <Table summary="List of photos" size="small">
                 <TableBody>
-                  {inputs.photos.map((item: TApiImage) => <ImageListItem key={item.id} image={item} />)}
+                  {inputs.photos.map((item: Image) => <ImageListItem key={item.id} image={item} />)}
                 </TableBody>
               </Table>
             </Form>
@@ -103,7 +107,7 @@ const ProjectForm = (props: TResponseData) => {
             <Form onCancel={onCancelHandler} onSubmit={onSubmitHandler}>
               <Table summary="List of designs" size="small">
                 <TableBody>
-                  {inputs.images.map((item: TApiImage) => <ImageListItem key={item.id} image={item} />)}
+                  {inputs.images.map((item: Image) => <ImageListItem key={item.id} image={item} />)}
                 </TableBody>
               </Table>
             </Form>
@@ -114,7 +118,7 @@ const ProjectForm = (props: TResponseData) => {
       </TabPanel>
 
       <TabPanel value={value} index={3}>
-        <ProjectContent {...props} />
+        <ProjectContent {...new Project(inputs)} />
       </TabPanel>
     </AdminPageLayout>
   );
