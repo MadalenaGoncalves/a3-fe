@@ -31,9 +31,7 @@ export default class Contact {
     if (data.email) this.email = data.email;
     
     if (data.relations && data.relations.photo) {
-      data.relations.photo.forEach((img: Image) => {
-        this.photo = img;
-      });
+      this.photo = data.relations.photo;
     }
   }
 

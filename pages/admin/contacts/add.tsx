@@ -3,7 +3,6 @@ import { NextPage } from 'next';
 import Contact from '../../../models/contact';
 
 import ContactForm from '../../../components/admin/ContactsForm';
-// import Contact from '../../../models/contact';
 
 const AdminAddContactPage: NextPage<Contact> = (contact) => {
   return (

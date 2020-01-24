@@ -54,8 +54,8 @@ const ContactsList = (props: Props) => {
                   </TableCell>
 
                   <TableCell align="center">
-                  {item.photo
-                    ? <Avatar className={classes.avatar} alt={name} src={getThumbnailUrl(item.photo)} />
+                  {item.relations && item.relations.photo
+                    ? <Avatar className={classes.avatar} alt={name} src={getThumbnailUrl(item.relations.photo)} />
                     : <AccountCircleOutlinedIcon className={classes.avatar} color="disabled" />
                   }
                   </TableCell>

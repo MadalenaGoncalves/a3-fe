@@ -75,7 +75,7 @@ export interface Contact {
   url?: string,
 
   relations?: {
-    photo: Image[],
+    photo: Image,
   }
 }
 
