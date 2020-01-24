@@ -1,8 +1,6 @@
-import { Image, Project as ProjectResponse } from './response';
+import { Image, Project as ResponseProject } from './response';
 
 export default class Project {
-  // response?: ProjectResponse;
-  
   id?: string;
   title?: string;
   description?: string;
@@ -21,8 +19,7 @@ export default class Project {
 
   mainPhoto?: Image;
 
-  // TODO: refactor code: data should not be optional
-  constructor(data?: ProjectResponse) {
+  constructor(data?: ResponseProject) {
     if (!data) {
       this.createEmpty();
       return;
@@ -66,7 +63,7 @@ export default class Project {
     }
   }
 
-  createEmpty() {
+  createEmpty = () => {
     this.id = undefined;
     this.title = undefined;
     this.description = undefined;
@@ -83,19 +80,19 @@ export default class Project {
     this.images = undefined;
   }
 
-  getDateStr(start_year?: number, end_year?: number): string {
+  getDateStr = (start_year?: number, end_year?: number): string => {
     const values = [start_year, end_year];
     return values.join(" - ");
   }
 
-  getAddressStr(address: string, postcode: string, city: string): string {
+  getAddressStr = (address: string, postcode: string, city: string): string => {
     const part1 = address;
     const part2 = [postcode, city];
     const values = [part1, part2.join(" ")];
     return values.join(", ");
   }
 
-   getPhasesStr(phases?: string): string | undefined {
+   getPhasesStr = (phases?: string): string | undefined => {
     if (!phases || phases.length == 0)
       return;
     const list: string[] = phases.split(';');

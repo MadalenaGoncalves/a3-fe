@@ -1,5 +1,12 @@
-export type ResponseData = 
-  Project | Project[] | ProjectMinimal[] | Contact | Contact[];
+/* From Nextjs documentation: 
+  Data returned from `getInitialProps` is serialized when server rendering, 
+  similar to a `JSON.stringify`. Make sure the returned object from `getInitialProps` 
+  is a plain `Object` and not using `Date`, `Map` or `Set`.
+*/
+export type ResponseData = {
+  code: number,
+  data: Project | Project[] | ProjectMinimal[] | Contact | Contact[]
+};
 
 export type ResponseError = {
   code: number,
