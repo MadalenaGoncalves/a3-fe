@@ -1,21 +1,25 @@
 import { NextPage } from 'next';
 
 import get from '../../../api/get';
-import { TResponse } from '../../../api/types';
-import { API_PATH_CONTACTS } from '../../../api/constants';
+import { ServerResponse, ResponseData, Contact } from '../../../models/response';
+import { API_CONTACT_ALL } from '../../../api/constants';
 
+import ErrorHandler from '../../../components/ErrorHandler';
 import List from '../../../components/admin/ContactsList';
 
-const AdminContactListPage: NextPage<TResponse> = (props) => {
+const AdminContactListPage: NextPage<ServerResponse> = (props) => {
   return (
-    <List {...props} />
+    <ErrorHandler
+      render={(data: ResponseData) => (<List {...data as Contact[]} />)}
+      response={props}
+    />
   );
 }
 
 AdminContactListPage.getInitialProps = async () => {
-  let response: TResponse;
+  let response: ServerResponse;
   try {
-    response = await get(API_PATH_CONTACTS);
+    response = await get(API_CONTACT_ALL);
   } catch (err) {
     response = err;
   }

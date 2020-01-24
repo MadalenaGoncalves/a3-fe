@@ -1,21 +1,25 @@
 import { NextPage } from 'next';
 
 import get from '../../../api/get';
-import { TResponse } from '../../../api/types';
-import { API_PATH_PROJECTS } from '../../../api/constants';
+import { ServerResponse, ResponseData, ProjectMinimal } from '../../../models/response';
+import { API_PROJECT_ALL } from '../../../api/constants';
 
+import ErrorHandler from '../../../components/ErrorHandler';
 import List from '../../../components/admin/ProjectsList';
 
-const AdminProjectsListPage: NextPage<TResponse> = (props) => {
+const AdminProjectsListPage: NextPage<ServerResponse> = (props) => {
   return (
-    <List {...props} />
+    <ErrorHandler
+      render={(data: ResponseData) => (<List {...data as ProjectMinimal[]} />)}
+      response={props}
+    />
   );
 }
 
 AdminProjectsListPage.getInitialProps = async () => {
-  let response: TResponse;
+  let response: ServerResponse;
   try {
-    response = await get(API_PATH_PROJECTS);
+    response = await get(API_PROJECT_ALL);
   } catch (err) {
     response = err;
   }

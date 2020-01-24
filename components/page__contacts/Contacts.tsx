@@ -1,16 +1,14 @@
-import { TResponseData } from '../../api/types';
-
 import PageLayout from '../../components/PageLayout';
-
-import withErrorHander from '../../hocs/withErrorHander';
-
-import Contact from '../../models/contact';
+import { Contact } from '../../models/response';
 
 
 const entryStyle = { borderTop: '1px solid', marginBottom: '2rem' };
 
-const Contacts = (props: TResponseData) => {
-  const contacts = props.data;
+type Props = {
+  contacts: Contact[]
+}
+const Contacts = (props: Props) => {
+  const { contacts } = props;
   return (
     <PageLayout title="Contacts">
       <h1>Contacts</h1>
@@ -30,4 +28,4 @@ const Contacts = (props: TResponseData) => {
   );
 }
 
-export default withErrorHander(Contacts);
+export default Contacts;

@@ -1,9 +1,7 @@
-import { TResponseError } from '../../api/types';
-
+import { ResponseError } from '../../models/response';
 import PageLayout from './PageLayout';
 
-
-const ErrorMessage = (error: TResponseError) => {
+export default (error: ResponseError) => {
   return (
     <PageLayout title="Error">
       <h1>Something went wrong...</h1>
@@ -11,5 +9,3 @@ const ErrorMessage = (error: TResponseError) => {
     </PageLayout>
   );
 }
-
-export default ErrorMessage;

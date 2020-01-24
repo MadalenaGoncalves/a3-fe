@@ -1,21 +1,21 @@
 import Link from 'next/link';
 
-import { TResponseData } from '../../api/types';
+import { ProjectMinimal } from '../../models/response';
 import { getMainImageUrl } from '../../api/utils';
-import withErrorHander from '../../hocs/withErrorHander';
-import { TApiProjectMinimal } from '../../models/serverTypes';
 
 import PageLayout from '../PageLayout';
 import { GridList, GridItem } from './styles';
 
 
-const Projects = (props: TResponseData) => {
-  const projects = props.data;
-  
+type Props = {
+  projects: ProjectMinimal[]
+};
+const Projects = (props: Props) => {
+  const { projects } = props;
   return (
     <PageLayout title="Projects">
       <GridList>
-        {projects && projects.map((project: TApiProjectMinimal) => {
+        {projects && projects.map((project: ProjectMinimal) => {
           return (
             <GridItem key={project.id}>
               {project.imageId ? (
@@ -42,4 +42,4 @@ const Projects = (props: TResponseData) => {
   );
 }
 
-export default withErrorHander(Projects);
+export default Projects;

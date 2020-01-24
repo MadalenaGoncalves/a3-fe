@@ -1,19 +1,28 @@
 import { NextPage } from 'next';
 
 import get from '../api/get';
-import { TResponse } from '../api/types';
-import { API_PATH_CONTACTS } from '../api/constants';
+import { ServerResponse, ResponseData, Contact as ResponseContact } from '../models/response';
+import { API_CONTACT_ALL } from '../api/constants';
 
-import ContactsLayout from '../components/page__contacts/Contacts';
+import ErrorHandler from '../components/ErrorHandler';
+import Contacts from '../components/page__contacts/Contacts';
 
-const ContactsPage: NextPage<TResponse> = (props) => {
-  return <ContactsLayout {...props} />;
+const ContactsPage: NextPage<ServerResponse> = (props) => {
+  const renderHandler = (response: ResponseData) => {
+    return (
+      <Contacts contacts={response.data as ResponseContact[]} />
+    );
+  }
+  return (
+    <ErrorHandler response={props} render={renderHandler} />
+  );
 }
 
 ContactsPage.getInitialProps = async () => {
-  let response: TResponse;
+  let response: ServerResponse;
   try {
-    response = await get(API_PATH_CONTACTS);
+    response = await get(API_CONTACT_ALL);
+
   } catch (err) {
     response = err;
   }

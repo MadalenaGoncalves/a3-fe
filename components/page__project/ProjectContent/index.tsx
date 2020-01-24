@@ -1,16 +1,14 @@
 import * as React from 'react';
 
 import { getImageUrl } from '../../../api/utils';
-import { TApiImage } from '../../../models/serverTypes';
+import { Image } from '../../../models/response';
+import Project from '../../../models/project';
 
 import { PageSection } from '../../PageLayout';
 import { Header, HR, MainImage, PhotoGallery, Photo, DesignGallery } from './styles';
 import MetaItem from '../MetaItem';
-import { IProps } from '../Project';
 
-const ProjectContent = (props: IProps) => {
-  const project = props.data;
-
+const ProjectContent = (project: Project) => {
   const renderAddress = () => (
     <>
       {project.addressLine1}
@@ -39,7 +37,7 @@ const ProjectContent = (props: IProps) => {
 
       {project.photos &&
         <PhotoGallery>
-          {project.photos.map((img: TApiImage) => (
+          {project.photos.map((img: Image) => (
             <Photo key={img.id}>
               <figure>
                 <img src={getImageUrl(img)} alt="" />
@@ -52,7 +50,7 @@ const ProjectContent = (props: IProps) => {
 
       {project.images &&
         <DesignGallery>
-          {project.images.map((img: TApiImage) => (
+          {project.images.map((img: Image) => (
             <figure key={img.id}>
               <img src={getImageUrl(img)} alt="" />
             </figure>

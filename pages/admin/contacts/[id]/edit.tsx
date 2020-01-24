@@ -1,39 +1,29 @@
 import { NextPage } from 'next';
 
 import get from '../../../../api/get';
-import { TResponse, TResponseError } from '../../../../api/types';
-import { API_PATH_ONE_CONTACT } from '../../../../api/constants';
-import Contact from '../../../../models/contact';
+import { ServerResponse, ResponseData, Contact } from '../../../../models/response';
+import { API_CONTACT_ONE } from '../../../../api/constants';
 
+import ErrorHandler from '../../../../components/ErrorHandler';
 import ContactForm from '../../../../components/admin/ContactsForm';
 
-interface Props {
-  data: Contact,
-  error?: TResponseError
-}
-
-const AdminEditContactPage: NextPage<TResponse> = (props) => {
+const AdminEditContactPage: NextPage<ServerResponse> = (props) => {
   return (
-    <ContactForm {...props} />
+    <ErrorHandler
+      render={(data: ResponseData) => (<ContactForm {...data as Contact} />)}
+      response={props}
+    />
   );
 }
 
 AdminEditContactPage.getInitialProps = async ({ query }) => {
-  const { id } = query;
-  
+  let response: ServerResponse;
   try {
-    const response = await get(API_PATH_ONE_CONTACT, { id });
-    const data = response.data[0];
-
-    const initialProps: Props = {
-      data: new Contact(data)
-    }
-
-    return initialProps;
-
+    response = await get(API_CONTACT_ONE, { id: query.id });
   } catch (err) {
-    return err;
+    response = err;
   }
+  return response;
 };
 
 export default AdminEditContactPage;

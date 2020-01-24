@@ -1,39 +1,29 @@
 import { NextPage } from 'next';
 
 import get from '../../../../api/get';
-import { TResponse, TResponseError } from '../../../../api/types';
-import { API_PATH_ONE_PROJECT } from '../../../../api/constants';
-import Project from '../../../../models/project';
+import { API_PROJECT_ONE } from '../../../../api/constants';
+import { ServerResponse, ResponseData, Project } from '../../../../models/response';
 
+import ErrorHandler from '../../../../components/ErrorHandler';
 import ProjectForm from '../../../../components/admin/ProjectForm';
 
-interface Props {
-  data: Project,
-  error?: TResponseError
-}
-
-const AdminEditProjectPage: NextPage<TResponse> = (props) => {
+const AdminEditProjectPage: NextPage<ServerResponse> = (props) => {
   return (
-    <ProjectForm {...props} />
+    <ErrorHandler
+      render={(data: ResponseData) => (<ProjectForm {...data as Project} />)}
+      response={props}
+    />
   );
 }
 
 AdminEditProjectPage.getInitialProps = async ({ query }) => {
-  const { id } = query;
-  
+  let response: ServerResponse;
   try {
-    const response = await get(API_PATH_ONE_PROJECT, { id });
-    const data = response.data[0];
-
-    const initialProps: Props = {
-      data: new Project(data)
-    }
-
-    return initialProps;
-
+    response = await get(API_PROJECT_ONE, { id: query.id });
   } catch (err) {
-    return err;
+    response = err;
   }
+  return response;
 };
 
 export default AdminEditProjectPage;

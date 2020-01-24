@@ -1,38 +1,32 @@
 import { NextPage } from 'next';
 
 import get from '../../api/get';
-import { TResponseError } from '../../api/types';
-import { API_PATH_ONE_PROJECT } from '../../api/constants';
-import ProjectLayout from '../../components/page__project/Project';
-import Project from '../../models/project';
+import { ServerResponse, ResponseData, Project as ResponseProject } from '../../models/response';
+import { API_PROJECT_ONE } from '../../api/constants';
 
-interface Props {
-  data: Project,
-  error?: TResponseError
+import ErrorHandler from '../../components/ErrorHandler';
+import Project from '../../components/page__project/Project';
+
+
+const ProjectPage: NextPage<ServerResponse> = (props) => {
+  const renderHandler = (response: ResponseData) => {
+    return (
+      <Project project={response.data as ResponseProject} />
+    );
+  }
+  return (
+    <ErrorHandler response={props} render={renderHandler} />
+  );
 }
 
-const ProjectPage: NextPage<Props> = (props) => <ProjectLayout {...props} />
-
 ProjectPage.getInitialProps = async ({ query }) => {
-  const { id } = query;
-  
+  let response: ServerResponse;
   try {
-    const response = await get(API_PATH_ONE_PROJECT, { id });
-    const data = response.data[0];
-
-    const initialProps: Props = {
-      data: new Project(data)
-    }
-
-    return initialProps;
-
+    response = await get(API_PROJECT_ONE, { id: query.id });
   } catch (err) {
-    const initialProps: Props = {
-      data: new Project(),
-      error: err
-    }
-    return initialProps;
+    response = err;
   }
+  return response;
 };
 
 export default ProjectPage;

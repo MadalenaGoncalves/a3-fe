@@ -1,21 +1,29 @@
 import { NextPage } from 'next';
 
 import get from '../../api/get';
-import { TResponse } from '../../api/types';
-import { API_PATH_PROJECTS } from '../../api/constants';
+import { ServerResponse, ResponseData, ProjectMinimal } from '../../models/response';
+import { API_PROJECT_ALL } from '../../api/constants';
 
-import ProjectsLayout from '../../components/page__projects/Projects';
+import ErrorHandler from '../../components/ErrorHandler';
+import Projects from '../../components/page__projects/Projects';
 
+const ProjectsPage: NextPage<ServerResponse> = (props) => {
+  const renderHandler = (response: ResponseData) => {
+    return (
+      <Projects projects={response.data as ProjectMinimal[]} />
+    );
+  }
 
-const ProjectsPage: NextPage<TResponse> = (props) => {
-  return <ProjectsLayout {...props} />;
+  return (
+    <ErrorHandler response={props} render={renderHandler} />
+  );
 }
 
 //[ 'err', 'req', 'res', 'pathname', 'query', 'asPath' ]
 ProjectsPage.getInitialProps = async () => {
-  let response: any;
+  let response: ServerResponse;
   try {
-    response = await get(API_PATH_PROJECTS);
+    response = await get(API_PROJECT_ALL);
   } catch (err) {
     response = err;
   }

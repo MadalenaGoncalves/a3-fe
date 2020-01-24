@@ -1,27 +1,28 @@
 import * as React from 'react';
 import Link from 'next/link';
 
-import withErrorHander from '../../hocs/withErrorHander';
-import CProject from '../../models/project';
+import { Project as ResponseProject } from '../../models/response';
+import Project from '../../models/project';
 
 import PageLayout from '../PageLayout';
 import ProjectContent from './ProjectContent';
 import { AllProjectsLink } from './styles';
 
-export interface IProps {
-  data: CProject,
-}
+type Props = {
+  project: ResponseProject
+};
+export default (props: Props) => {
+  const project = new Project(props.project);
 
-const Project = ({ data }: IProps) => (
-  <PageLayout title={data.title}>
-    <ProjectContent data={data} />
+  return (
+    <PageLayout title={project.title}>
+      <ProjectContent {...project} />
 
-    <AllProjectsLink>
-      <Link href='/projects' passHref>
-        <a title={data.title}>Andere Projekte</a>
-      </Link>
+      <AllProjectsLink>
+        <Link href='/projects' passHref>
+          <a title={project.title}>Andere Projekte</a>
+        </Link>
       </AllProjectsLink>
-  </PageLayout>
-);
-
-export default withErrorHander(Project);
+    </PageLayout>
+  );
+}
