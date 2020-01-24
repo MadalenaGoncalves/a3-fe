@@ -4,18 +4,19 @@ import Link from 'next/link';
 import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
+import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
+import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
-import { TResponseData } from '../../api/types';
 import { getThumbnailUrl } from '../../api/utils';
-import Contact from '../../models/contact';
+import { Contact } from '../../models/response';
 
 import AdminPageLayout from './AdminPageLayout';
 import DeleteIconButtonDialog from './DeleteIconButtonDialog';
-import IconButton from './IconButton';
+import EditIconButton from './IconButton';
 import PLight from './PLight';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -30,20 +31,28 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const ContactsList = (props: TResponseData) => {
+type Props = {
+  contacts: Contact[]
+}
+const ContactsList = (props: Props) => {
   const classes = useStyles();
-  const data = props.data;
+  const { contacts } = props;
   return (
     <AdminPageLayout>
-      {!data && <PLight>No contacts yet...</PLight>}
-      {data &&
+      {!contacts && <PLight>No contacts yet...</PLight>}
+      {contacts &&
         <Table summary="List of contacts" size="small">
           <TableBody>
-            {!data && <PLight>No contacts yet...</PLight>}
-            {data && data.map((item: Contact) => {
+            {contacts.map((item: Contact) => {
               const name = item.name || "";
               return (
                 <TableRow key={item.id}>
+                  <TableCell align="center">
+                    <IconButton color="primary" aria-label="drag">
+                      <DragIndicatorIcon />
+                    </IconButton>
+                  </TableCell>
+
                   <TableCell align="center">
                   {item.photo
                     ? <Avatar className={classes.avatar} alt={name} src={getThumbnailUrl(item.photo)} />
@@ -60,7 +69,7 @@ const ContactsList = (props: TResponseData) => {
 
                   <TableCell align="center">
                     <Link href={`/admin/contacts/${item.id}/edit`} passHref>
-                      <a><IconButton edit ariaLabel={name} /></a>
+                      <a><EditIconButton edit ariaLabel={name} /></a>
                     </Link>
                   </TableCell>
                   <TableCell align="center">

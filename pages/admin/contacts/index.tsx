@@ -8,11 +8,12 @@ import ErrorHandler from '../../../components/ErrorHandler';
 import List from '../../../components/admin/ContactsList';
 
 const AdminContactListPage: NextPage<ServerResponse> = (props) => {
+  const renderHandler = (response: ResponseData) => {
+    return (<List contacts={response.data as Contact[]} />);
+  }
+
   return (
-    <ErrorHandler
-      render={(data: ResponseData) => (<List {...data as Contact[]} />)}
-      response={props}
-    />
+    <ErrorHandler response={props} render={renderHandler} />
   );
 }
 

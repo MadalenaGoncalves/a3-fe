@@ -2,13 +2,13 @@ import * as React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 
-import { TResponseData } from '../../../api/types';
+import Contact from '../../../models/contact';
 import useForm from '../../../hooks/useForm';
 import FileInput from '../../form/FileInput';
 import TextInput from '../../form/TextInput';
 import AdminPageLayout from '../AdminPageLayout';
 import Form from '../Form';
-import { API_PATH_ONE_CONTACT } from '../../../api/constants';
+import { API_CONTACT_ONE } from '../../../api/constants';
 import patch from '../../../api/patch';
 import { AvatarSection, FormSection, MainContentWrapper } from './styles';
 
@@ -20,19 +20,24 @@ const useStyles = makeStyles({
   },
 });
 
-const ContactsForm = (props: TResponseData) => {
+type Props = {
+  add?: boolean,
+  contact: Contact
+}
+
+const ContactsForm = (props: Props) => {
   const classes = useStyles();
   
   const onUploadHandler = () => {};
   
   const onSubmit = (values: any) => {
     // VALIDATE
-    patch(API_PATH_ONE_CONTACT, values);
+    patch(API_CONTACT_ONE, values);
   }
 
   const onCancel = () => {}
 
-  const { inputs, onChangeHandler, onSubmitHandler, onCancelHandler } = useForm(props.data, onSubmit, onCancel);
+  const { inputs, onChangeHandler, onSubmitHandler, onCancelHandler } = useForm(props.contact, onSubmit, onCancel);
   
   return (
     <AdminPageLayout>
