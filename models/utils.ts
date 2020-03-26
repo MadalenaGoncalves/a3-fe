@@ -5,7 +5,8 @@ export function getUrlBase(): string {
 }
 
 export function buildImageUrl(img: Image) {
-  return `${getUrlBase()}${img.url}`;
+  // return `${getUrlBase()}${img.url}`;
+  return img.url;
 }
 
 export function buildFloorAreaString(proj: Project) {
