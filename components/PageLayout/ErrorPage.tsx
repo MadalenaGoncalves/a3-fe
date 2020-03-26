@@ -1,7 +1,7 @@
-import { ResponseError } from '../../models/response';
+import { AxiosError } from 'axios';
 import PageLayout from './PageLayout';
 
-export default (error: ResponseError) => {
+export default (error: AxiosError<any>) => {
   return (
     <PageLayout title="Error">
       <h1>Something went wrong...</h1>

@@ -1,14 +1,15 @@
-const BASE_FONT_SIZE = 16;
-
-const toRem = (valueInPx) => `${valueInPx / BASE_FONT_SIZE}rem`;
+const BASE_FONT_SIZE = 14;
 
 // font sizes in px
 const fontSizeDefinitions = [
+  12,
   14,
   16,
   18,
+  22,
+  28,
   30,
-  48
+  32,
 ];
 
 // spacing values in px
@@ -35,8 +36,10 @@ const spacingDefinitions = [
   50,
   60,
   70,
-  96
+  96,
 ];
+
+const toRem = (valueInPx) => `${valueInPx / BASE_FONT_SIZE}rem`;
 
 
 // ------- FONTS -------
@@ -46,22 +49,20 @@ fonts.family.primary = "'Open Sans', sans-serif";
 fonts.family.secondary = "'Raleway', 'Open Sans', sans-serif";
 
 fonts.weight = {}
-fonts.weight.lighter = 200;
-fonts.weight.light = 300;
+fonts.weight.light = 200;
 fonts.weight.normal = 400;
-fonts.weight.softbold = 500;
-fonts.weight.semiboldbold = 600;
 fonts.weight.bold = 700;
 
 fonts.size = {}
 fonts.size.base = BASE_FONT_SIZE;
-fontSizeDefinitions.forEach(n => { fonts.size[`_${n}`] = toRem(n); });
+// fontSizeDefinitions.forEach(n => { fonts.size[`_${n}`] = toRem(n); });
+fontSizeDefinitions.forEach(n => { fonts.size[`_${n}`] = `${n}px`; });
 
 
 // ------- SPACING in rem -------
 const spacing = {};
-// const spacing = toRem;
-spacingDefinitions.forEach(n => { spacing[`_${n}`] = toRem(n); });
+// spacingDefinitions.forEach(n => { spacing[`_${n}`] = toRem(n); });
+spacingDefinitions.forEach(n => { spacing[`_${n}`] = `${n}px`; });
 spacing.sectionVerticalSpacing = '4.5rem';
 spacing.pageLayoutMargin = '7rem';
 
@@ -71,10 +72,15 @@ const colors = {};
 colors.primary = '#22313f';
 colors.white = '#fff';
 colors.black = '#000';
+colors.yellow = '#FFCC00';
+colors.yellow1 = '#ffcc33';
+colors.linkYellow = '#EFB31B';
+colors.projekte = '#669999';
 // colors.black = 'rgb(95, 93, 93)';
 // colors.lightgray = '#edf0eb';
 colors.gray = 'rgb(95, 93, 93)';
-colors.lightgray = 'rgba(219, 214, 209, 0.4)';
+// colors.lightgray = 'rgba(219, 214, 209, 0.4)';
+colors.linegray = 'rgba(219, 214, 209, 0.9)';
 // colors.menubar = 'rgba(255,255,255,0.5)';
 colors.menubar = colors.white;
 colors.footerBg = colors.primary;

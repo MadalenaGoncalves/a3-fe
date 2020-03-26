@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components';
-import { font__menuLink, font__menuLink_tabletUp } from '../../styles/styleguide/typography';
+import { font__menuLink } from '../../styles/styleguide/typography';
 import media from '../../styles/media';
 
 interface MenuNavProps {
   visible: boolean
 }
 export const MenuNav = styled.nav<MenuNavProps>`
-  background-color: black;
+  background-color: ${(props: any) => props.theme.colors.yellow};
   overflow: hidden;
   height: 100%;
   max-height: 100vh;
@@ -37,28 +37,22 @@ export const MenuNav = styled.nav<MenuNavProps>`
     height: auto;
     max-height: 100%;
 
-    margin-top: 1.5rem;
-    padding-left: 1rem;
+    margin-top: 2.5rem;
   `};
 `;
 
 export const MenuNav__List = styled.ul`
-  padding: 0 1rem;
   margin: 0 auto;
 
   li {
     list-style: none;
     text-align: right;
     position: relative;
+    text-align: center;
   }
 
   a {
     ${font__menuLink};
-    color: currentColor;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
   }
 
   ${media.tablet`
@@ -66,9 +60,7 @@ export const MenuNav__List = styled.ul`
 
     li {
       text-align: left;
-    }
-    a {
-      ${font__menuLink_tabletUp};
+      padding-bottom: 1rem;
     }
   `};
 `;
@@ -95,7 +87,7 @@ export const Icon = styled.div<IconProps>`
   position: relative;
 
   span {
-    background-color: ${props => props.theme.colors.primary};
+    background-color: ${props => props.theme.colors.yellow};
     border-radius: 0;
     height: 3px;
     position: absolute;
@@ -115,7 +107,7 @@ export const Icon = styled.div<IconProps>`
     }
     
     &:nth-child(2) {
-      top: 50%;
+      top: 49%;
       opacity: 1;
 
       ${props => props.active && css`

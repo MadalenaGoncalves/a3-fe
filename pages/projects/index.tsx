@@ -1,33 +1,40 @@
 import { NextPage } from 'next';
 
-import get from '../../api/get';
-import { ServerResponse, ResponseData, ProjectMinimal } from '../../models/response';
-import { API_PROJECT_ALL } from '../../api/constants';
+import { query, GET_PROJECTS } from '../../api';
+import { Response, isData, ProjectsData } from '../../models/response';
 
-import ErrorHandler from '../../components/ErrorHandler';
+// import ErrorHandler from '../../components/ErrorHandler';
 import Projects from '../../components/page__projects/Projects';
 
-const ProjectsPage: NextPage<ServerResponse> = (props) => {
-  const renderHandler = (response: ResponseData) => {
+const ProjectsPage: NextPage<Response> = (props) => {
+  // console.log('ProjectsPage', props);
+  if (isData(props)) {
     return (
-      <Projects projects={response.data as ProjectMinimal[]} />
+      <Projects {...props.data as ProjectsData} />
     );
+  } else {
+    return <div>TODO: handle error</div>
   }
-
-  return (
-    <ErrorHandler response={props} render={renderHandler} />
-  );
+  // const renderHandler = (response: Response) => {
+  //   return (
+  //     <Projects projects={response as Project[]} />
+  //   );
+  // }
+  // return (
+  //   <ErrorHandler response={props} render={renderHandler} />
+  // );
 }
 
 //[ 'err', 'req', 'res', 'pathname', 'query', 'asPath' ]
 ProjectsPage.getInitialProps = async () => {
-  let response: ServerResponse;
   try {
-    response = await get(API_PROJECT_ALL);
+    let response: Response;
+    response = await query(GET_PROJECTS);
+    return response;
   } catch (err) {
-    response = err;
+    console.log("ERRO", err);
+    return err;
   }
-  return response;
 };
 
 export default ProjectsPage;

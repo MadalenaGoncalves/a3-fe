@@ -1,32 +1,40 @@
 import { NextPage } from 'next';
 
-import get from '../api/get';
-import { ServerResponse, ResponseData, Contact as ResponseContact } from '../models/response';
-import { API_CONTACT_ALL } from '../api/constants';
+import { query, GET_CONTACTS } from '../api';
+import { Response, isData, ContactsData } from '../models/response';
 
-import ErrorHandler from '../components/ErrorHandler';
+// import ErrorHandler from '../components/ErrorHandler';
 import Contacts from '../components/page__contacts/Contacts';
 
-const ContactsPage: NextPage<ServerResponse> = (props) => {
-  const renderHandler = (response: ResponseData) => {
+const ContactsPage: NextPage<Response> = (props) => {
+  // console.log(props);
+  if (isData(props)) {
     return (
-      <Contacts contacts={response.data as ResponseContact[]} />
+      <Contacts {...props.data as ContactsData} />
     );
+  } else {
+    return <div>TODO: handle error</div>
   }
-  return (
-    <ErrorHandler response={props} render={renderHandler} />
-  );
+  // const renderHandler = (response: Response) => {
+  //   return (
+  //     <Contacts contacts={response as Contact[]} />
+  //   );
+  // }
+  // return (
+  //   <ErrorHandler response={props} render={renderHandler} />
+  // );
 }
 
 ContactsPage.getInitialProps = async () => {
-  let response: ServerResponse;
   try {
-    response = await get(API_CONTACT_ALL);
-
+    let response: Response;
+    response = await query(GET_CONTACTS);
+    return response;
   } catch (err) {
-    response = err;
+    console.log("ERRO", err);
+    return err;
   }
-  return response;
 };
+
 
 export default ContactsPage;

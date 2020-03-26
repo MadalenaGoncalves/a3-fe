@@ -1,43 +1,86 @@
 import Link from 'next/link';
 
-import { ProjectMinimal } from '../../models/response';
-import { getMainImageUrl } from '../../api/utils';
+import { buildImageUrl } from '../../models/utils';
+import { ProjectsData } from '../../models/response';
+import { Project, UploadFile as ImageFile } from '../../models/types';
 
 import PageLayout from '../PageLayout';
-import { GridList, GridItem } from './styles';
+import { SimplePage } from '../PageLayout/styles';
+import { GridList, GridItem, Image } from './styles';
 
 
-type Props = {
-  projects: ProjectMinimal[]
-};
-const Projects = (props: Props) => {
-  const { projects } = props;
+const Projects = (props: ProjectsData) => {
   return (
     <PageLayout title="Projects">
-      <GridList>
-        {projects && projects.map((project: ProjectMinimal) => {
-          return (
-            <GridItem key={project.id}>
-              {project.imageId ? (
-                  <Link href='/projects/[id]' as={`/projects/${project.id}`} passHref>
-                    <a title={project.title}>
-                      {project.imageId ? (
-                        <figure>
-                          <img src={getMainImageUrl(project.filename, project.fileformat)} alt="" />
-                          <figcaption><h2>{project.title}</h2></figcaption>
-                        </figure>
-                      ) : (
-                        <h2>{project.title}</h2>
-                      )}
-                    </a>
-                  </Link>
-                  ) : (
+      <SimplePage fullWidth>
+        <GridList>
+          {props.projects.map((project: Project) => {
+            return (
+              <GridItem key={project.uuid}>
+                <Link href='/projects/[id]' as={`/projects/${project.uuid}`} passHref>
+                  <a>
+                    {project.cover ? (
+                      <Image url={`${buildImageUrl(project.cover as ImageFile)}`} />
+                    ) : (
+                      <Image url={'/static/images/placeholder.png'} />
+                    )}
                     <h2>{project.title}</h2>
-                  )}
-            </GridItem>
-          );
-        })}
-      </GridList>
+                  </a>
+                </Link>
+              </GridItem>
+            );
+          })}
+          {/* {projects && projects.map((project: Project) => {
+            return (
+              <GridItem key={project.id}>
+                <Link href='/projects/[id]' as={`/projects/${project.id}`} passHref>
+                  <a>
+                    {project.cover ? (
+                      <Image url={`${buildImageUrl(project.cover)}`} />
+                    ) : (
+                      <Image url={'/static/images/placeholder.png'} />
+                    )}
+                    <h2>{project.title}</h2>
+                  </a>
+                </Link>
+              </GridItem>
+            );
+          })}
+          {projects && projects.map((project: Project) => {
+            return (
+              <GridItem key={project.id}>
+                <Link href='/projects/[id]' as={`/projects/${project.id}`} passHref>
+                  <a>
+                    {project.cover ? (
+                      <Image url={`${buildImageUrl(project.cover)}`} />
+                    ) : (
+                      <Image url={'/static/images/placeholder.png'} />
+                    )}
+                    <h2>{project.title}</h2>
+                  </a>
+                </Link>
+              </GridItem>
+            );
+          })}
+          {projects && projects.map((project: Project) => {
+            console.log(project.cover);
+            return (
+              <GridItem key={project.id}>
+                <Link href='/projects/[id]' as={`/projects/${project.id}`} passHref>
+                  <a>
+                    {project.cover ? (
+                      <Image url={`${buildImageUrl(project.cover)}`} />
+                    ) : (
+                      <Image url={'/static/images/placeholder.png'} />
+                    )}
+                    <h2>{project.title}</h2>
+                  </a>
+                </Link>
+              </GridItem>
+            );
+          })} */}
+        </GridList>
+      </SimplePage>
     </PageLayout>
   );
 }

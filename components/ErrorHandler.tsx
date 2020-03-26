@@ -1,17 +1,21 @@
-import { ServerResponse, ResponseData, ResponseError, isError } from '../models/response';
-import ErrorPage from '../components/PageLayout/ErrorPage';
+// import { Response, ResponseData, ResponseError, isError } from '../models/response';
+// import ErrorPage from '../components/PageLayout/ErrorPage';
 
-type Props = {
-  response: ServerResponse,
-  render(data: ResponseData): JSX.Element,
-};
+// type Props = {
+//   response: Response,
+//   render(data: ResponseData): JSX.Element,
+// };
 
-const ErrorHandler = (props: Props) => {
-  if (isError(props.response)) {
-    return <ErrorPage {...props.response as ResponseError} />;
-  }
+// const ErrorHandler = (props: Props) => {
+//   if (isError(props.response)) {
+//     return <ErrorPage {...props.response as ResponseError} />;
+//   }
 
-  return props.render(props.response as ResponseData);
+//   return props.render(props.response as ResponseData);
+// }
+
+const ErrorHandler = () => {
+  return null;
 }
 
 export default ErrorHandler;

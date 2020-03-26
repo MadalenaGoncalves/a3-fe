@@ -10,17 +10,16 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "analyze": "cross-env BUNDLE_ANALYZE=both next build",
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
-    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
+    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
+    "generate": "graphql-codegen -r dotenv/config"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/react-redux": "^7.1.5",
     "axios": "^0.19.0",
     "cross-env": "^5.2.1",
     "dotenv": "^8.2.0",
-    "isomorphic-fetch": "^2.2.1",
     "next": "^9.1.4",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -29,12 +28,17 @@
     "styled-components": "^4.4.1"
   },
   "devDependencies": {
-    "@types/isomorphic-fetch": "0.0.35",
+    "@graphql-codegen/cli": "^1.13.1",
+    "@graphql-codegen/typescript": "^1.13.1",
+    "@graphql-codegen/typescript-operations": "^1.13.1",
+    "@graphql-codegen/typescript-resolvers": "^1.13.1",
     "@types/node": "^12.12.14",
     "@types/react": "^16.9.13",
     "@types/react-dom": "^16.9.4",
+    "@types/react-redux": "^7.1.5",
     "@types/styled-components": "^4.4.0",
     "babel-plugin-styled-components": "^1.10.6",
+    "graphql": "^14.6.0",
     "typescript": "^3.7.2"
   }
 }

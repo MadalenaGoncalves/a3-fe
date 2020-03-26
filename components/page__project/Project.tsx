@@ -1,26 +1,22 @@
 import * as React from 'react';
 import Link from 'next/link';
 
-import { Project as ResponseProject } from '../../models/response';
-import Project from '../../models/project';
-
+// import { ProjectData } from '../../models/response';
+import { Project } from '../../models/types';
 import PageLayout from '../PageLayout';
+import { StyledBackLink } from '../StyledLink';
+
 import ProjectContent from './ProjectContent';
 import { AllProjectsLink } from './styles';
 
-type Props = {
-  project: ResponseProject
-};
-export default (props: Props) => {
-  const project = new Project(props.project);
-
+export default (props: Project) => {
   return (
-    <PageLayout title={project.title}>
-      <ProjectContent {...project} />
+    <PageLayout title={props.title}>
+      <ProjectContent {...props} />
 
       <AllProjectsLink>
         <Link href='/projects' passHref>
-          <a title={project.title}>Andere Projekte</a>
+          <StyledBackLink>Andere Projekte</StyledBackLink>
         </Link>
       </AllProjectsLink>
     </PageLayout>

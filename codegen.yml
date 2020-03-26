@@ -1,0 +1,12 @@
+schema: ${SCHEMA_PATH}
+documents: './api/query/*.graphql'
+generates:
+  ./models/operations.d.ts:
+    plugins:
+        - typescript-operations
+  ./models/types.d.ts:
+    plugins:
+      - typescript
+  ./models/resolvers.d.ts:
+    plugins:
+      - typescript-resolvers

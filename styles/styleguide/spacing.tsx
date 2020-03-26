@@ -4,7 +4,7 @@ import media from '../media';
 export const page_layout__margin = css`
   margin-left: 1rem;
   margin-right: 1rem;
-  max-width: 1200px;
+  max-width: 1140px;
   
   ${media.tablet`
     padding-left: 2.5rem;

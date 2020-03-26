@@ -5,13 +5,13 @@ import Link from 'next/link';
 
 import Menu from '../../containers/Menu';
 import MenuTogglerButton from '../../containers/MenuToggler';
-import { Header, JumpToMainLink, MainContainer, FooterLinks, MobileFooter } from './styles';
+import { Header, HeaderContent, JumpToMainLink, MainContainer, FooterLinks, MobileFooter } from './styles';
+import { StyledLink } from '../StyledLink';
 
 interface HomepageProps {
   children: any,
   title?: string,
 };
-
 
 
 const defaultTitle = 'A3 ARCHITEKTEN BERLIN-DÜSSELDORF'
@@ -31,17 +31,32 @@ const PageLayout: NextPage<HomepageProps> = ({ children, title }) => {
       </Head>
 
       <Header>
-        <JumpToMainLink href="#main-content" id="skip-to-main-content">Jump to main content</JumpToMainLink>
-        <Link href="/" passHref>
-            <a title="Home"><img src="/static/images/logo_transparency.png" /></a>
+        <HeaderContent>
+          <JumpToMainLink href="#main-content" id="skip-to-main-content">Jump to main content</JumpToMainLink>
+          <Link href="/projects" passHref>
+            <a><img src="/static/images/logo_transparency.png" /></a>
           </Link>
-        <Menu />
-        <MenuTogglerButton />
-        
-        <FooterLinks>
-          <Link href='/impressum' passHref><a title='Impressum'>Impressum</a></Link>
-          <Link href='/datenschutz' passHref><a title='Datenschutz'>Datenschutz</a></Link>
-        </FooterLinks>
+          <Menu />
+          <MenuTogglerButton />
+          
+          <FooterLinks>
+            <div>
+              <Link href='/a3projekte' passHref>
+                <StyledLink>A3 Projekte</StyledLink>
+              </Link>
+            </div>
+            <div>
+              <Link href='/impressum' passHref>
+                <StyledLink>Impressum</StyledLink>
+              </Link>
+            </div>
+            <div>
+              <Link href='/datenschutz' passHref>
+                <StyledLink>Datenschutz</StyledLink>
+              </Link>
+            </div>
+          </FooterLinks>
+        </HeaderContent>
       </Header>
       
       <MainContainer>
@@ -49,8 +64,9 @@ const PageLayout: NextPage<HomepageProps> = ({ children, title }) => {
           {children}
 
           <MobileFooter>
-            <Link href='/impressum' passHref><a title='Impressum'>Impressum</a></Link>
-            <Link href='/datenschutz' passHref><a title='Datenschutz'>Datenschutz</a></Link>
+            <Link href='/a3projekte' passHref><a>A3 Projekte</a></Link>
+            <Link href='/impressum' passHref><a>Impressum</a></Link>
+            <Link href='/datenschutz' passHref><a>Datenschutz</a></Link>
           </MobileFooter>
         </main>
       </MainContainer>

@@ -1,52 +1,68 @@
-import styled from 'styled-components';
-import { page_layout__margin } from '../../../styles/styleguide/spacing';
-import { PageSection } from '../../PageLayout';
+import styled, { css } from 'styled-components';
+import media from '../../../styles/media';
+import { Enum_Componentprojectcontentimages_Span as ColumnSpan } from '../../../models/types';
 
-export const Header = styled.h1`
-  margin-left: auto;
-  margin-right: auto;
-  font-weight: 200;
-`;
-
-export const HR = styled.hr`
-  ${page_layout__margin};
+export const ProjectHeader = styled.h1`
   margin-top: 0;
-  margin-bottom: 0;
-  border: 0;
-  border-top: 2px dotted ${props => props.theme.colors.lightgray};
+  ${media.tablet`
+    margin-bottom: 0;
+  `};
 `;
 
-export const MainImage = styled.img`
+type ContentGridLayoutProps = { columns: ColumnSpan; };
+export const ContentGridLayout = styled.div<ContentGridLayoutProps>`
+  display: grid;
+  grid-column-gap: 2.5rem;
+  grid-row-gap: 1rem;
+  grid-template-columns: 1fr;
+  
+  ${props => props.columns === ColumnSpan.Two && css`
+    ${media.tablet`
+      grid-template-columns: 1fr 1fr;
+    `};
+  `};
+
+  ${props => props.columns === ColumnSpan.Three && css`
+    ${media.tablet`
+      grid-template-columns: 1fr 1fr 1fr;
+    `};
+  `};
+
+  img {
+    max-width: 100%;
+  }
+  margin-top: 4rem;
+  &:first-child {
+    margin-top: 0;
+  }
+`;
+
+export const ProjectTopContent = styled(ContentGridLayout)`
+  .cover { grid-area: cover; }
+  .header { grid-area: header; }
+  .description { grid-area: description; }
+  .meta { grid-area: meta; }
+
+  grid-template-areas:
+    "header"
+    "cover"
+    "description"
+    "meta";
+  ${media.tablet`
+    grid-template-areas:
+      "cover header"
+      "cover description"
+      "cover meta";
+  `};
+`;
+
+
+export const CoverPhoto = styled.img`
   max-width: 100%;
   width: 100%;
 `;
 
-export const PhotoGallery = styled(PageSection)`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
-`;
-export const Photo = styled.div`
-  background-color: ${props => props.theme.colors.lightgray};
-  figure {
-    margin: 0;
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  img {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
-    max-height: 100%;
-  }
-`;
-
-export const DesignGallery = styled(PageSection)`
-figure {
+export const Figure = styled.figure`
   margin: 2.5rem 0;
 
   &:first-child {
@@ -55,8 +71,8 @@ figure {
   &:last-child {
     margin-bottom: 0;
   }
-}
-img {
+  
+  img {
     display: block;
     margin: 0 auto;
     margin-top: 2.5rem;

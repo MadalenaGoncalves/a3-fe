@@ -1,29 +1,41 @@
+import { Contact } from '../../models/types';
+import { ContactsData } from '../../models/response';
+
 import PageLayout from '../../components/PageLayout';
-import { Contact } from '../../models/response';
+import { SimplePage } from '../../components/PageLayout/styles';
+import { ContactItem } from './styles';
 
-
-const entryStyle = { borderTop: '1px solid', marginBottom: '2rem' };
-
-type Props = {
-  contacts: Contact[]
-}
-const Contacts = (props: Props) => {
-  const { contacts } = props;
+const Contacts = (props: ContactsData) => {
   return (
-    <PageLayout title="Contacts">
-      <h1>Contacts</h1>
-      {contacts && contacts.map((contact: Contact) => (
-        <div key={contact.id} style={entryStyle}>
-          {contact.name} <br />
-          {contact.department} <br />
-          <br />
-          {contact.address} <br />
-          {contact.postcode} {contact.city} <br />
-          <br />
-          Tel.: {contact.phone} <br />
-          Fax.: {contact.fax} <br />
-        </div>
-      ))}
+    <PageLayout title="Über uns und Kontakte">
+      <SimplePage>
+        <h1>Kontakte</h1>
+        
+        {props.contacts && props.contacts.map((contact: Contact) => (
+          <ContactItem key={contact.id}>
+            <h2>
+              {contact.name}
+              {contact.name2 && (
+                <>
+                  <br />
+                  {contact.name2}
+                </>
+              )}
+            </h2>
+            <p>
+              {contact.address} <br />
+              {contact.postcode} {contact.city}
+            </p>
+            <p>
+              Tel.: {contact.phone} <br />
+              Fax.: {contact.fax}
+            </p>
+            <p>
+              <a href={`mailto:${contact.email}`}>{contact.email}</a>
+            </p>
+          </ContactItem>
+        ))}
+      </SimplePage>
     </PageLayout>
   );
 }
